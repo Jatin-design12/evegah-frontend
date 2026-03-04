@@ -1,0 +1,59 @@
+image: node:16-bullseye
+
+variables:
+  PROD_DEPLOY_SERVER_IP: 35.175.101.179
+  DEV_DEPLOY_SERVER_IP: 35.175.101.179
+  PROD_DEPLOYMENT_DIR: /var/www/evegah-admin-prod
+  DEV_DEPLOYMENT_DIR: /var/www/evegah-admin
+
+  COMMIT_FILE: .lastcommit.txt
+  LOCAL_BUILD_DIR: dist/evegah/
+
+prod_deployment_job:
+  stage: deploy
+  only:
+    - release-prod
+  cache:
+    paths:
+      - node_modules
+  before_script:
+    # Generates to connect to the AWS unit the SSH key.
+    - mkdir -p ~/.ssh
+    - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    # Sets the permission to 600 to prevent a problem with AWS
+    # that it’s too unprotected.
+    - chmod 600 ~/.ssh/id_rsa
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - npm install -f
+    - ./node_modules/@angular/cli/bin/ng build --configuration=production --base-href .
+    - TZ=Asia/Kolkata date > $COMMIT_FILE && git log -n 1 >> $COMMIT_FILE
+    - cp $COMMIT_FILE $LOCAL_BUILD_DIR
+    - which rsync || ( apt-get update -y && apt-get install rsync -y )
+    - rsync -av $LOCAL_BUILD_DIR ubuntu@$PROD_DEPLOY_SERVER_IP:$PROD_DEPLOYMENT_DIR
+    - echo "Prod Deployment complete"
+
+
+dev_deployment_job:
+  stage: deploy
+  only:
+    - release-dev
+  cache:
+    paths:
+      - node_modules
+  before_script:
+    # Generates to connect to the AWS unit the SSH key.
+    - mkdir -p ~/.ssh
+    - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    # Sets the permission to 600 to prevent a problem with AWS
+    # that it’s too unprotected.
+    - chmod 600 ~/.ssh/id_rsa
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - npm install -f
+    - ./node_modules/@angular/cli/bin/ng build --configuration=development --base-href .
+    - TZ=Asia/Kolkata date > $COMMIT_FILE && git log -n 1 >> $COMMIT_FILE
+    - cp $COMMIT_FILE $LOCAL_BUILD_DIR
+    - which rsync || ( apt-get update -y && apt-get install rsync -y )
+    - rsync -av $LOCAL_BUILD_DIR ubuntu@$DEV_DEPLOY_SERVER_IP:$DEV_DEPLOYMENT_DIR
+    - echo "Dev Deployment complete"

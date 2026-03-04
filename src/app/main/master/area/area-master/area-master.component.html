@@ -1,0 +1,127 @@
+<!--App Sub Header Start -->
+<app-sub-header [heading]="heading" [icon]="'arrow_back'" (onBackIcon)="backButton()"></app-sub-header>
+<!--App Sub Header End -->
+<!-- Add Category Main body Start -->
+<section class="main-body">
+    <!-- <app-draw-area></app-draw-area> -->
+    <mat-card class="mainCard zone-card-masrer p-0">
+        <mat-card-content class="card-body p-4 pb-0">
+            <div class="row">
+                <div class="col-md-12 mt-3 ">
+                            
+                    <form [formGroup]="ariaMasterForm" class="py-2">
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <!-- <app-input [label]="'City Name'" formControlName="city" [readonly]="'true'"></app-input> -->
+                                <app-select-dropdown [config]="stateDropdown" formControlName="stateId"
+                                    [items]="stateData" (selectionChange)="getCity()">
+                                </app-select-dropdown>
+                            </div>
+                            <div class="col-sm-3">
+                                <!-- <app-input [label]="'State Name'" formControlName="state"
+                                    [readonly]="'true'"></app-input> -->
+                                <app-select-dropdown [config]="cityDropdown" formControlName="cityId"
+                                    [items]="cityData" (selectionChange)="getCityDetailByCityId($event)">
+                                </app-select-dropdown>
+                            </div>
+                            <div class="col-sm-3 ">
+                                <app-select-dropdown [config]="areaTypeDropdown" formControlName="areaId"
+                                    [items]="areaData">
+                                </app-select-dropdown>
+                            </div>
+                            <div class="col-sm-3">
+                                <app-input [label]="'Enter Area Name'" [type]="'text'"
+                                    formControlName="name"></app-input>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="note ">
+                                    *Click the Get Address button for Set Selected Area Address in Field
+                                    First area is created inside map after that click on the Get Address button for get new created area address into below field
+                                </label>
+                                <div class="btns mt-2">
+                                    <div class="btn-div">
+                                        <button *ngIf="!this.viewMode" class="btn btn-primary getAddress " (click)="getAddress()" >Get
+                                            Address</button>
+                                            <app-textarea [label]="'Full Address'" formControlName="address"
+                                    [readonly]="'true'"></app-textarea>
+                                      </div>
+                                    
+                                    <!-- <button *ngIf="editMode || isAreaDelete" class="btn btn-danger  getAddress" (click)="delete()">
+                                        Delete Created Area </button>  -->
+                                        <!-- <ng-container *ngIf="!viewMode"> 
+                                            <button  class="btn btn-danger getAddressM " #delete (click)="deleteArea()">
+                                                Delete Selected Area </button>
+                                        </ng-container> -->
+                                        
+                                    
+                                </div>
+                                
+                            </div>
+
+                           
+                            
+                            <div class="col-md-4">
+                                <mat-card-actions class="card-action p-2" *ngIf="!viewMode">
+                                    <app-button [label]="'Cancel'" [class]="'btn secondary ml-auto'" (click)="cancel()">
+                                    </app-button>
+                                    <app-button [label]="'Save'" [class]="'btn btn-primary'" (click)="saveArea()"
+                                    [disabled]="ariaMasterForm.invalid" ></app-button>
+                                       <!--  -->
+                                </mat-card-actions>
+                            </div>
+
+
+                        </div>
+
+
+                    </form>
+                    
+                </div>
+
+                <div class="col-md-12 map-right-Border">
+                    <!-- <div class="" (click)="circle()">circle</div>
+                    <button class="btn btn-danger " #delete>
+                        Delete Selectd Area </button> -->
+                    <!-- <button class="btn btn-warning " (click)="reloadPage()">
+                            Refresh</button> -->
+                           <p>* You can add area from map and below controls</p> 
+                    <div class="container map-section">
+                        <input type="text" class="my-search-box" (keydown.enter)="$event.preventDefault()"
+                            placeholder="Search Area" type="text" #search />
+
+                            <ng-container *ngIf="!viewMode"> 
+                                <button  class="btn btn-danger DeleteBtn " #delete (click)="deleteArea()">
+                                    Delete Selected Area </button>
+                            </ng-container>
+                        <div id="map" #map></div>
+                   <p class="note">*if map is not visible , Please allow the location in browser .</p>
+ 
+                        <!-- <app-draw-map (nameEmitter)="receivename($event)" (latlngEmitter)="latlngReceive($event)" (address)="setAddress($event)"></app-draw-map> -->
+                    </div>
+
+                </div>
+               
+                <!-- <mat-card-actions class="p-2" *ngIf="!viewMode">
+                    <app-button [label]="'Cancel'" [class]="'btn secondary ml-auto'" (click)="cancel()">
+                    </app-button>
+                    <app-button [label]="'Save'" [class]="'btn btn-primary'" (click)="saveArea()"
+                        [disabled]="ariaMasterForm.invalid"></app-button>
+                </mat-card-actions> -->
+
+
+            </div>
+            <span #infowindowContent>
+                <span #placeName class="title"></span><br />
+                <strong></strong> <span #placeId></span><br />
+                <span #placeAddress></span>
+            </span>
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=drawing&v=weekly"
+                defer></script>
+        </mat-card-content>
+
+    </mat-card>
+
+</section>
+<!-- Add Category Main body End -->

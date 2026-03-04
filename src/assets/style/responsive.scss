@@ -1,0 +1,39 @@
+ // © 2021 .Kritin Digital solutions  All rights reserved.
+ // Original Author: Lokesh Rajput
+ // Original Date: 06 July 2021
+ // X-Small devices (portrait phones, less than 576px)
+ // No media query for `xs` since this is the default in Bootstrap
+ // Small devices (landscape phones, 576px and up)
+ @media (max-width: 767px) {
+     .open {
+         width: 0rem !important;
+     }
+     .close {
+         width: 100% !important;
+         position: absolute;
+     }
+     .close .mat-list-item .itemName,
+     .close .mat-list-item .arrow {
+         display: block !important;
+     }
+     .main .left,
+     .main .right{
+        min-height: 0px !important;
+        justify-content: center !important;
+    }
+    .main .session_container{
+        margin-right: 0px !important;
+    }
+ }
+ 
+ // Medium devices (tablets, 768px and up)
+ @media (min-width: 768px) {}
+ 
+ // Large devices (desktops, 992px and up)
+ @media (min-width: 992px) {}
+ 
+ // X-Large devices (large desktops, 1200px and up)
+ @media (min-width: 1200px) {}
+ 
+ // XX-Large devices (larger desktops, 1400px and up)
+ @media (min-width: 1400px) {}

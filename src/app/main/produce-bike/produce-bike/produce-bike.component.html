@@ -1,0 +1,43 @@
+<!--  App Sub Header Start-->
+<app-sub-header [heading]="'Produce Vehicle'" [icon]="'local_play'"></app-sub-header>
+<!--  App Sub Header End [buttonLabel]="'Add Form'" [showButton]="'true'" (click)="openDialog()"-->
+
+<!-- Produce List Main body Start -->
+<section>
+    <div class="card form-card">
+        <form [formGroup]="ProduceForm">
+                <div class="row noMarginmatField d-flex justify-content-end">
+                    <div class="col-md-3">
+                        <app-select-dropdown [config]="selectm" [items]="vehicleModel" formControlName="vehicleId"
+                            (selectionChange)="vehicleIdType($event)">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-md-3">
+                        <app-select-dropdown [config]="UID" [items]="uidModel" formControlName="uId">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-md-3">
+                        <app-select-dropdown [config]="lock" [items]="lockSelectDropdown" formControlName="lockId">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-md-3">
+                        <app-input [type]="'text'" [label]="'Enter Qr Number'"  formControlName='qrNumber'></app-input>
+                    </div>
+                    <div class="col-md-3 text-end mt-3">
+                        <app-button [label]="'Generate QR'" [class]="'btn btn-primary'"
+                            (click)="addUpdateBikeProduce()">
+                        </app-button>
+                    </div>
+                </div> 
+        </form>
+    </div>
+</section>
+<section class="main-body bike">
+    <mat-card class="mainCard card_set p-0">
+        <mat-card-content class="card-body p-0">
+            <!-- (onRowAction)="rowclick($event)" -->
+            <app-table [cols]="cols" [data]="BikeProduceDetailsList" (onAction)="onActionHandler($event)"></app-table>
+        </mat-card-content>
+    </mat-card>
+</section>
+<!-- Produce List Main body End -->

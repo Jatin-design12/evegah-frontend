@@ -1,0 +1,164 @@
+<!-- <button class="btn btn-primary get"(click)="setCordinate()">set Cordinate</button>
+<button class="btn btn-primary get set"(click)="getCordinate()">get Cordinate</button> -->
+<section class="map-btn ">
+<div class="row  align-items-center mt-1 px-2" >
+    <div class="col-md-8">
+       <button class="btn btn-primary gets sets shows ms-4" (click)="show()">Get Drawing</button>
+       <button class="btn btn-primary " (click)="getAddress()">Get Address</button>  
+       
+        <button class="btn btn-warning " (click)="reloadPage()">
+           Refresh</button>
+
+           <button class="btn btn-danger " #delete>
+           Delete </button>
+           <button class="btn btn-info "#moveBtn >
+           Go Khazrana</button>
+            <button class="btn btn-info "#moveBtn1 >
+      Go  Mayur Hospital </button>
+
+      <br>
+      <button class="btn btn-success" (click)="sendCircle()">Circle Api</button>
+      
+      <button class="btn btn-success ms-2" (click)="sendRect()">Rectangle Api</button>
+
+      <button class="btn btn-success ms-2" (click)="sendPolygon()">Polygon Api</button>
+      <button class="btn btn-success ms-2 " (click)="FindPointnearestPointFL()">Nearest (first and Last)</button>
+
+      <button class="btn btn-success ms-2 " (click)="FindPointnearestPointDistanceFL()"> Distance (first and Last)</button>
+
+     <br> Total Distance: <span id="total"></span>
+        <!-- <span>Duration: {{this.duration}}</span> -->
+    </div>
+
+
+   
+    <!-- (click)="calculateAndDisplayRouteDes(22.731064755667624, 75.90912521915168)" -->
+    <div class="col-md-4" >
+       <!-- <p>  -->
+        <!-- <span> Distance:   {{this.distance }}</span> -->
+          <!-- Total Distance: <span id="total"></span>
+        <span>Duration: {{this.duration}}</span>
+    </p> -->
+    <label for="radius">Radius in meters</label>
+    <input type="text" id="radius" class="form-control nearPoint mb-2 w-100" [(ngModel)]="InputRadius" />
+     
+     <button class="btn btn-success  " (click)="FindPointnearestPoint()">Nearest(slast and Last)</button>
+
+      <button class="btn btn-success ms " (click)="FindPointnearestPointDistance()"> Distance (slast and Last)</button>
+
+      
+    </div>
+    <div class="col-md-2" id="floating-panel-div">
+        <div id="floating-panel" >
+            <b>Mode of Travel: </b>
+            <select id="mode" #mode matInput>
+              <option value="DRIVING">Driving</option>
+              <option value="WALKING">Walking</option>
+              <option value="BICYCLING">Bicycling</option>
+              <option value="TRANSIT">Transit</option>
+            </select>
+          </div>
+
+          
+    </div>
+
+    
+</div>
+
+    
+<form [formGroup]="cityForm">
+    <div class="row">
+        <div class="col-md-3">
+            <app-select-dropdown [config]="cityDropdown" [items]="cityData" formControlName="cityId" (selectionChange)="getCityMaps($event)" >
+            </app-select-dropdown>
+          </div>
+          <div class="col-md-3">
+            <app-select-dropdown [config]="areaDropdown" formControlName="areaId" [items]="areaData"  (selectionChange)="getAreaMaps($event)"></app-select-dropdown>
+          </div>
+          <div class="col-md-3">
+            <app-input [label]="'Enter IOT Device  name'" [type]="'text'" formControlName="lock" [value]="'EMI0998'"></app-input>
+            <!-- <input class="form-control" formControlName="lock"> -->
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-info setDevice" (click)="setDevice()">set Device name </button>
+          </div>
+    </div>
+</form>
+   
+
+    <!-- <button class="btn btn-danger "(click)="deleteShape()">
+            Delete</button> -->
+
+            
+
+           
+
+    <div class="addDetail" *ngIf="showAddress">
+
+        <form [formGroup]="addressForm">
+            <div class="row">
+                <div class="col-md-3">
+                    <app-input [label]="'City Name'" formControlName="city"></app-input>
+                </div>
+                <div class="col-md-3">
+                    <app-input [label]="'District Name'" formControlName="district"></app-input>
+
+                </div>
+                <div class="col-md-3">
+                    <app-input [label]="'Division Name'" formControlName="division"></app-input>
+
+                </div>
+                <div class="col-md-3">
+                    <app-input [label]="'State Name'" formControlName="state"></app-input>
+
+                </div>
+                <div class="col-md-3">
+                    <app-input [label]="'Country Name'" formControlName="country"></app-input>
+                </div>
+                <div class="col-md-3">
+                    <app-input [label]="'Pincode Number'" formControlName="pincode"></app-input>
+
+                </div>
+                <div class="col-md-3">
+                    <app-input [label]="'Place Id'" formControlName="placeId"></app-input>
+                </div>
+                <div class="col-md-12">
+                    <app-textarea [label]="'Full Address'" formControlName="address"></app-textarea>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+
+</section>
+
+
+
+
+<section class="container">
+    <input type="text" class="my-search-box" (keydown.enter)="$event.preventDefault()" placeholder="Search Location"
+        type="text" #search />
+        <div class="row">
+            <div class="col-md-12">
+                <div #map id="map" class="map"></div>
+            </div>
+            <div class="col-md-12">
+                <div id="sidebar">
+                    <!-- <p>Total Distance: <span id="total"></span></p> -->
+                    <div id="panel" #panel></div>
+                  </div>
+            </div>
+        </div>
+    
+</section>
+
+
+<span #infowindowContent>
+    <span #placeName class="title"></span><br />
+    <strong></strong> <span #placeId></span><br />
+    <span #placeAddress></span>
+</span>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=drawing&v=weekly"
+    defer></script>

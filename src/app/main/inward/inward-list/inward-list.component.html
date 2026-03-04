@@ -1,0 +1,26 @@
+<!--  App Sub Header Start-->
+<app-sub-header [heading]="'Inward List'" [icon]="'open_with'" [buttonLabel]="'Add Inward'" [showButton]="'true'"
+    (click)="navigateToMaster($event)"></app-sub-header>
+<!--  App Sub Header End-->
+<!-- Inward List Start -->
+    <section class="main-body">
+        <mat-card class="mainCard card_set p-0 m-0">
+            <mat-tab-group animationDuration="0ms"  (selectedTabChange)="getBikeInward()">
+                <mat-tab label="Bike Inward List"  >
+                    <mat-card class="mainCard card_set p-0">
+                        <mat-card-content class="card-body">
+                            <app-table [cols]="cols" [data]="rowData" (onAction)="onActionHandler($event)"></app-table>
+                        </mat-card-content>
+                    </mat-card>
+                </mat-tab>
+                <mat-tab label="IOT Device  Inward List">
+                    <mat-card class="mainCard card_set p-0">
+                        <mat-card-content class="card-body">
+                            <app-table [cols]="cols2" [data]="lockInwardData" (onAction)="onActionHandler($event)"></app-table>
+                        </mat-card-content>
+                    </mat-card>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card>
+    </section>
+    <!-- Inward List End -->

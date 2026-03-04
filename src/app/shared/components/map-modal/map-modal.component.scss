@@ -1,0 +1,19 @@
+agm-map {
+    height: 450px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  } 
+.mapouter {
+  position: relative;
+  text-align: right; 
+  height: 480px;
+}
+
+.gmap_canvas {
+  overflow: hidden;
+  background: none !important; 
+  height: 450px;
+} 
+.btn-close {
+  margin-bottom: 10px; 
+}

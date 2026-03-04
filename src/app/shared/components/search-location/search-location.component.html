@@ -1,0 +1,19 @@
+<!-- <button class="btn btn-danger ganger" (click)="delete()">Delete</button> -->
+
+ <input *ngIf="!viewMode"
+    type="text"
+    class="my-search-box"
+    (keydown.enter)="$event.preventDefault()"
+    placeholder="Search Location"
+    type="text"
+    #search
+  />
+  <div  #map class="map" id="map" >
+  </div>
+
+
+  <span #infowindowContent>
+    <span #placeName class="title"></span><br />
+    <strong></strong> <span #placeId></span><br />
+    <span #placeAddress></span>
+  </span>

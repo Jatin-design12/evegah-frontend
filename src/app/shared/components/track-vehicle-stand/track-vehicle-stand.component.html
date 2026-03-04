@@ -1,0 +1,24 @@
+<section class="text-center" >
+
+    <mat-dialog-header>
+        <div class="header-detail">
+            <h4 class="mb-0">Zone Detail : {{data.data.zoneName.zoneName}}, Address : {{data.data.zoneName.zone_address}}, Capacity: {{data.data.zoneName.zone_capacity}}, Size: {{data.data.zoneName.zone_size}}</h4> 
+            <h4 class="mb-0">Area Detail : {{data.data.zoneName.areaName}}, Type: {{data.data.zoneName.areaType}}, Address: {{data.data.zoneName.areaFullAddress}}</h4> 
+           
+            Total No. Of Bike : <strong>{{data.data.zoneName.totalBikeCount}}</strong>
+             <!-- <button  *ngIf="data.data.zoneName.bikeCount > 0"class="btn btn-primary" (click)="showBike()">show bike on map</button> -->
+             Ride On : <strong>{{data.data.zoneName.bookedKikeCount}}</strong>,  
+             Available Bike : <strong>{{data.data.zoneName.availableBikeCount}}</strong>,
+             Maintenance Bike : <strong>{{data.data.zoneName.underMaintenanceBikeCount}}</strong>
+        </div>
+        <button type="button" class="btn-close" (click)="closemodel()"></button>
+
+        
+    </mat-dialog-header>
+    <mat-dialog-content class="text-center"> 
+        <mat-card >
+            <app-table [cols]="cols" [data]="tableData" [excelName]="'zone bike list'"></app-table>
+        </mat-card>
+    </mat-dialog-content>
+    
+</section>

@@ -1,0 +1,51 @@
+<!--  App Sub Header Start-->
+<app-sub-header [heading]="'Withdraw Request'" [icon]="'filter_list'"></app-sub-header>
+<!--  App Sub Header end-->
+
+<section class="main-body">
+    <mat-card class="p-0 m-0 withdrawRequest">
+        <mat-tab-group animationDuration="0ms"  [(selectedIndex)]="demo1TabIndex">
+            <mat-tab label="Pending">
+                <mat-card class="mainCard p-0">
+                    <mat-card-content class="card-body p-0">
+                        <app-table [cols]="cols1" [data]="withdrawInPending"
+                            (onCheckboxEvent)="onRowActioHandler($event)" 	(onDone)="checkUpdateForAvailable($event)"></app-table>
+                    </mat-card-content>
+                    <mat-card-footer>
+                        <button class="btn btn-danger"(click)="clearCheckBox()">Clear</button>
+
+                        <button class="btn btn-primary" (click) = "processingButton(11,$event)"> Process</button>
+
+                    </mat-card-footer>
+                </mat-card>
+            </mat-tab>
+            <mat-tab label="Processing">
+                <mat-card class="mainCard p-0"> 
+                    <mat-card-content class="card-body p-0"> 
+                        <app-table [cols]="cols2" [data]="withdrawInprocessing" [pendingtotal] = "true" (onCheckboxEvent)="onRowActioHandler($event)"></app-table> 
+
+                    </mat-card-content> 
+                    <mat-card-footer>
+                        <button class="btn btn-success" >Export Batch</button>
+                        <button class="btn btn-danger" (click)="clearCheckBox()">Clear</button>
+                        <button class="btn btn-primary" (click) = "processingButton(12,$event)">Mark as Paid</button>
+                    </mat-card-footer>
+                </mat-card>
+            </mat-tab>
+            <mat-tab label="Completed">
+                <mat-card class="mainCard p-0">
+                    <mat-card-content class="card-body p-0">
+                        <app-table [cols]="cols3" [data]="withdrawIncompleted"></app-table>
+                    </mat-card-content>
+                </mat-card>
+            </mat-tab>
+            <mat-tab label="Cancelled Withdraw Request">
+                <mat-card class="mainCard p-0">
+                    <mat-card-content class="card-body p-0">
+                        <app-table [cols]="cols4" [data]="withdrawCancled"></app-table>
+                    </mat-card-content>
+                </mat-card>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card>
+</section>

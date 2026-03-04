@@ -1,0 +1,22 @@
+<!-- sub Header Start -->
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <mat-icon class="text-white" aria-hidden="false" aria-label="Example home icon" fontSet="material-icons-outlined" (click)="backButton($event)"> {{icon}}
+                </mat-icon>
+            </div>
+            <h4 class="main-head">{{heading}}</h4>
+      
+        </div>
+        <div  class="page-title-actions " *ngIf = "walletAmount && creditAmount">
+           <h6 class="wallet"> ₹ {{walletAmount}}Wallet</h6> 
+           <h6 class="Credit"> ₹ {{creditAmount}}Credit</h6>
+        </div>
+        <div class="page-title-actions" *ngIf="showButton">
+            <button class="button_cont btn btn-primary" tabindex="0" (click)="onClickButton($event)"> {{buttonLabel}}
+            </button>
+        </div>
+    </div>
+</div>
+<!-- sub Header End -->

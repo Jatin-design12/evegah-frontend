@@ -1,0 +1,6 @@
+<label class="inputlabel"[class]="class" > {{label}}
+  <input type="file"  (change)="changeEvent($event)"  [disabled]="disabled"  [accept]="fileType"> 
+  <!-- multiple="multiple" -->
+</label>
+
+<!-- (click)="$event.target.value=null" -->

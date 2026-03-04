@@ -1,0 +1,22 @@
+<div class="containers mapouter">
+    <div class="d-flex justify-content-between">
+        <p>{{this.data.pageValue.lockNumber}}</p>
+        <button class="btn-close" mat-dialog-close></button>
+    </div>
+    
+
+    <div class="gmap_canvas">
+    <!-- <input type="text" class="my-search-box" (keydown.enter)="$event.preventDefault()" placeholder="Search Location"
+        type="text" #search />
+    <div id="map" #map></div> -->
+    <!-- <app-zone-map></app-zone-map> -->
+    <!-- <app-draw-map (nameEmitter)="receivename($event)" (zoneDetail)="zoneIdByDetail($event)" [addressData]="addressDetail"  [AllBikeData]="bikeData"></app-draw-map> -->
+
+    </div>
+</div>
+
+<span #infowindowContent>
+    <span #placeName class="title"></span><br />
+    <strong></strong> <span #placeId></span><br />
+    <span #placeAddress></span>
+</span>

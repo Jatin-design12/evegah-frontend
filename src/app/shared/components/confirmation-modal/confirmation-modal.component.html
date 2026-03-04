@@ -1,0 +1,109 @@
+<!-- lock unlock modal  -->
+<mat-card-header>
+  <ng-template #lock>
+    <ng-container *ngIf="data.action =='Light'">
+      <h4 class="mb-0">Light On / Off</h4>
+    </ng-container>
+    <ng-container *ngIf="data.action =='lock'">
+      <h4 class="mb-0">Lock/Unlock Vehicle</h4>
+    </ng-container>
+
+    <ng-container *ngIf="data.action =='POWER_ON_OFF'">
+      <h4 class="mb-0">Power On/Off Vehicle</h4>
+    </ng-container>
+
+    <ng-container *ngIf="data.action =='Beep'">
+      <h4 class="mb-0">Beep On / Off</h4>
+    </ng-container>
+
+    <ng-container *ngIf="data.action =='Clear Lock Instr.'">
+      <h4 class="mb-0">Clear Lock Instructions</h4>
+    </ng-container>
+
+    <ng-container *ngIf="data.action =='Clear Light Instr.'">
+      <h4 class="mb-0">Clear Light Instructions</h4>
+    </ng-container>
+
+    <ng-container *ngIf="data.action =='Active'">
+      <h4 class="mb-0">Status Active / Deactive</h4>
+    </ng-container>
+    <ng-container *ngIf="data.action =='Cancel Request'">
+      <h4 class="mb-0">Cancel Withdraw Request</h4>
+    </ng-container>
+  </ng-template>
+  <h4 class="mb-0" *ngIf="data.isFare; else lock">All Day Rate Confirmation</h4>
+  <h4 class="mb-0" *ngIf="data.action =='Publish'">Confirmation</h4>
+  <button type="button" class="btn-close" (click)="noClick()"></button>
+</mat-card-header>
+<mat-card-content *ngIf="!data.isFare">
+  <h5>{{data.data}}</h5>
+</mat-card-content>
+<mat-card-content *ngIf="data.action =='Cancel Request' && !data.isFare" >
+  Remark :
+  <!-- <input   matInput #input placeholder="Remark" [type]="'text'" [(ngModel)]="remark" /> -->
+  <textarea  id="name" name="name"  class="form-control"[label]="'enter Remark'" [type]="'text'" [(ngModel)]="remark" #name="ngModel" required ></textarea>
+  <div *ngIf="name.invalid && (name.dirty || name.touched)"
+  class="alert alert-danger"> Remark is required.</div>
+</mat-card-content>
+
+<mat-card-content *ngIf="data.isFare">
+  <p>{{data.data}}</p>
+  
+  
+  <p *ngIf="data.FormValue.minRateMonday < 1">Monday Rate : {{data.FormValue.minRateMonday}}
+    <span
+      *ngIf="data.FormValue.minRateMonday > 1 ||  data.FormValue.minRateMonday == '' ||  data.FormValue.minRateMonday == null"
+      [ngClass]="{'red' : data.FormValue.minRateMonday == '' ||  data.FormValue.minRateMonday == null}">No Value
+      Enter</span>
+  </p>
+
+  <p *ngIf="data.FormValue.minRateTuesday < 1">Tuesday Rate {{data.FormValue.minRateTuesday}}
+    <span
+      *ngIf="data.FormValue.minRateTuesday > 1 ||  data.FormValue.minRateTuesday == '' ||  data.FormValue.minRateTuesday == null"
+      [ngClass]="{'red' : data.FormValue.minRateTuesday == ''|| data.FormValue.minRateTuesday == null }">No Value
+      Enter</span>
+  </p>
+
+  <p *ngIf="data.FormValue.minRateWednesday < 1">Wednesday Rate : {{data.FormValue.minRateWednesday}}
+    <span
+      *ngIf="data.FormValue.minRateWednesday > 1 ||  data.FormValue.minRateWednesday == '' ||  data.FormValue.minRateWednesday == null "
+      [ngClass]="{'red' : data.FormValue.minRateWednesday == '' ||  data.FormValue.minRateWednesday == null}">No Value
+      Enter</span>
+  </p>
+
+  <p *ngIf="data.FormValue.minRateThursday < 1">Thursday Rate : {{data.FormValue.minRateThursday}}
+    <span
+      *ngIf="data.FormValue.minRateThursday > 1 ||  data.FormValue.minRateThursday == ''  ||  data.FormValue.minRateThursday == null"
+      [ngClass]="{'red' : data.FormValue.minRateThursday == '' ||  data.FormValue.minRateThursday == null}">No Value
+      Enter</span>
+  </p>
+
+  <p *ngIf="data.FormValue.minRateFriday < 1">Friday Rate : {{data.FormValue.minRateFriday}}
+    <span
+      *ngIf="data.FormValue.minRateFriday > 1 ||  data.FormValue.minRateFriday == '' ||  data.FormValue.minRateFriday == null"
+      [ngClass]="{'red' : data.FormValue.minRateFriday == '' ||  data.FormValue.minRateFriday == null}">No Value
+      Enter</span>
+  </p>
+
+  <p *ngIf="data.FormValue.minRateSaturday < 1">Saturday Rate : {{data.FormValue.minRateSaturday}}
+    <span
+      *ngIf="data.FormValue.minRateSaturday > 1 ||  data.FormValue.minRateSaturday == '' ||  data.FormValue.minRateSaturday == null"
+      [ngClass]="{'red' : data.FormValue.minRateSaturday == '' ||  data.FormValue.minRateSaturday == null}">No Value
+      Enter</span>
+  </p>
+
+  <p *ngIf="data.FormValue.minRateSunday < 1">Sunday Rate :{{data.FormValue.minRateSunday}}
+    <span
+      *ngIf="data.FormValue.minRateSunday > 1 ||  data.FormValue.minRateSunday == '' ||  data.FormValue.minRateSunday == null"
+      [ngClass]="{'red' : data.FormValue.minRateSunday == '' ||  data.FormValue.minRateSunday == null}">No Value
+      Enter</span>
+  </p>
+
+
+
+</mat-card-content>
+<mat-card-actions class="text-right">
+  <button type="button" class="btn savebtn" (click)="yesClick()">Yes</button>
+  <button type="button" class="btn nobtn" (click)="noClick()">No</button>
+
+</mat-card-actions>

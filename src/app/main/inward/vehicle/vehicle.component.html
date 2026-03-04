@@ -1,0 +1,31 @@
+<!--App Sub Header Start -->
+<app-sub-header [heading]="heading" [icon]="'directions_bike'" ></app-sub-header>
+<!--App Sub Header End -->
+
+<!-- Add Inward Main body Start -->
+<section class="main-body">
+    <mat-card class="mainCard card_set p-0 m-0 lastChildNotApply">
+        <form [formGroup]="bikeinwardForm">
+            <div class="col-sm-12">
+                <div class="row inward-form noMarginmatField">
+                    <div class="col-sm-3">
+                        <app-date formControlName="inwardDate" [label]="'Choose Date'" [maxDate]="today"></app-date>
+                    </div>
+                    <div class="col-sm-3">
+                        <app-select-dropdown [config]="modal" [items]="vehicleModel" formControlName="vehicleId">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-sm-3">
+                        <app-input [label]="'Enter Vehicle UID'" [type]="'text'" formControlName="vehicleModelUId">
+                        </app-input>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <app-button [label]="Buttonlabel" [class]="'btn btn-primary'" type="submit"
+                            (click)="addBikeInward()"></app-button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <app-table [cols]="cols" [data]="BikeModelDetails" (onAction)="onActionHandlerBIKE($event)"></app-table>
+    </mat-card>
+</section>

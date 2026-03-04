@@ -1,0 +1,139 @@
+// jayant 29-03-2022
+.card-div{
+  background-color: #fff;
+  width: 400px;
+   
+  left: 36%;
+  position: absolute;
+  padding: 36px;
+   
+  top: 80px;
+}
+// Main body section
+.fluid-cls{
+position: absolute;
+}
+.back-video{
+  position: absolute;
+  width: 100%;
+}
+/*
+ CSS for the main interaction
+*/
+.tabset > input[type="radio"] {
+  position: absolute;
+  left: -200vw;
+}
+
+.tabset .tab-panel {
+  display: none;
+}
+
+.tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
+.tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
+.tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
+.tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
+.tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
+.tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+  display: block;
+} 
+
+.tabset > label {
+  position: relative;
+  display: inline-block;
+  padding: 15px 15px 25px;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  margin-right: 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tabset > label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  width: 70px;
+  height: 4px;
+  background: #8d8d8d;
+}
+
+.tabset > label:hover,
+.tabset > input:focus + label {
+  color: #06c;
+}
+
+.tabset > label:hover::after,
+.tabset > input:focus + label::after,
+.tabset > input:checked + label::after {
+  background: #06c;
+}
+
+.tab-panel {
+  padding: 18px 0;
+  
+}
+
+/*
+ Demo purposes only
+*/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.tabset {
+  max-width: 65em;
+}
+.main-section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+img{
+  width: 40px;
+}
+h2{
+  font-weight: 500;
+  color: #3700d1;
+  letter-spacing: -1px;
+  margin-top: 28px;
+  font-size: 32px;
+  margin-bottom: 0;
+}
+h6{
+  font-size: 14px;
+  color: #00000087;
+  font-weight: 600;
+  margin-top: 6px;
+}
+.tab-panel label{
+  font-size: 12px;
+}
+.form-input{
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #e3e3e3;
+}
+.form-input::placeholder{
+  font-weight: 500 !important;
+font-size: 13px !important;
+color: #8d8d8d;
+}
+.form-input:focus-visible{
+  outline: none !important;
+}
+.btn-login{
+  margin-top: 22px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 12px;
+  background-color: #0066cc;
+  padding: 8px 0px;
+}

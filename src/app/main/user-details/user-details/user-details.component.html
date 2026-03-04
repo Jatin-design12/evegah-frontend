@@ -1,0 +1,15 @@
+<!--  App Sub Header Start-->
+<app-sub-header [heading]="'User Details'" [icon]="'person'"></app-sub-header>
+<!--  App Sub Header Start-->
+<!-- User List Main body Start -->
+<section class="main-body singleTable">
+    <mat-card class="mainCard card_set p-0">
+        <mat-card-content class="card-body">
+            <div class="user-table-shell" [class.is-refreshing]="isTableRefreshing">
+                <app-table [cols]="cols" [data]="rowData" (onAction)="onActionHandler($event)"
+                    (onDone)="handleDoneEvent($event)"></app-table>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</section>
+<!-- User List Main body End -->

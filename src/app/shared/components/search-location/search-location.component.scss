@@ -1,0 +1,33 @@
+// /* 
+//  * Always set the map height explicitly to define the size of the div element
+//  * that contains the map. 
+//  */
+div {
+  margin: 2em 1em;
+  height: 150px;
+  border: 1px solid black;
+  position: static!important;
+  overflow: hidden;
+}
+  input{
+    position: absolute;
+    top: 10px;
+    z-index: 1;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px -1px;
+    border: none;
+    margin-left: 10px;
+    max-width:250px;
+  }
+  
+
+  button.btn.btn-danger.ganger {
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    position: absolute;
+    top: -10px;
+    z-index: 2222;
+}

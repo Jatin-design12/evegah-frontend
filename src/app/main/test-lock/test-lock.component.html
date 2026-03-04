@@ -1,0 +1,39 @@
+ <!--  App Sub Header Start-->
+ <app-sub-header [heading]="'IOT Device Testing'" [icon]="'book'"></app-sub-header>
+ <!--  App Sub Header End-->
+ 
+ <!-- List Main body End -->
+ <section class="main-body">
+     <div class="card p-3">
+         <form [formGroup]="lockForm"> 
+                 <div class="row noMarginmatField"> 
+                     <div class="col-md-3">
+                         <app-input [label]="'Enter IOT Device  Number'" formControlName="name"></app-input>
+                     </div>
+                    
+                     <div class="col-md-3">
+                         <app-select-dropdown [config]="rideStatusDropdown" formControlName="enumId" [items]="enumData" >
+                         </app-select-dropdown>
+                     </div>
+                     <div class="col-md-3">
+                        <app-select-dropdown [config]="lightStatusDropdown" formControlName="lightId" [items]="lightData">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-md-3">
+                        <app-select-dropdown [config]="beepStatusDropdown" formControlName="beepId" [items]="beepData">
+                        </app-select-dropdown>
+                    </div>
+                     <div class="col-md-12 text-end mt-3">
+                         <app-button [label]="'Search'" [class]="'btn btn-primary'" (click)="submit()">
+                         </app-button>
+                     </div>
+                 </div> 
+         </form>
+     </div>
+     <mat-card class="mainCard card_set p-0 mt-4">
+         <mat-card-content class="card-body p-0"> 
+             <app-table [cols]="cols" [data]="tableData" [excelName]="'test lock'"></app-table>
+         </mat-card-content>
+     </mat-card>
+ </section> 
+ <!--  List Main body End -->

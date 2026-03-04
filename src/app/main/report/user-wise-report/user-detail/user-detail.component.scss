@@ -1,0 +1,21 @@
+header.model-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+
+    p {
+        margin: 0;
+    }
+
+    h4 {
+        font-size: 1.3em;
+        color: #000;
+        display: inline-flex;
+
+        p {
+            font-size: 0.85em;
+            margin: 0;
+            padding-left: 5px;
+        }
+    }
+}

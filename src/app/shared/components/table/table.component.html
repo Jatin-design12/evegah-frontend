@@ -1,0 +1,226 @@
+<!-- © 2021 .Kritin Digital solutions  All rights reserved.
+ Original Author: Lokesh Rajput
+ Original Date: 21 June 2021 -->
+
+<div class="table_main_div">
+  <!--  sub header start-->
+  <div class="tableHead">
+    <div class="tableHead-left">
+      <div class="searchInputWrapper">
+        <mat-icon matSuffix class="searchInputIcon">search</mat-icon>
+        <input type="text" (keyup)="applyFilter($event.target.value)" placeholder="Search" class="searchInput">
+      </div>
+    </div>
+    <div class="tableHead-right">
+      <div class="bulk-actions" *ngIf="showBulkActionControls">
+        <button mat-stroked-button type="button" (click)="selectAllRows()">Select All</button>
+        <button mat-stroked-button type="button" (click)="selectAndDeleteSelected()" [disabled]="!hasDeleteAction">Select & Delete</button>
+        <button mat-flat-button color="warn" type="button" (click)="deleteAllRows()" [disabled]="!hasDeleteAction">Delete All</button>
+      </div>
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle [matMenuTriggerFor]="columnMenu" title="Column visibility">
+          <mat-icon fontSet="material-icons-outlined">view_column</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle (click)="changeSearchStatus()" title="Search">
+          <mat-icon><span class="material-icons" fontSet="material-icons-outlined">filter_list</span></mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle [excelExport]="data" [fileName]="excelName" aria-label="excel" title="Download Excel">
+          <mat-icon fontSet="material-icons-outlined">description </mat-icon>
+        </mat-button-toggle>
+        <!-- <mat-button-toggle aria-label="excel" title="Download Pdf" (click)="pdf(event)">
+          <mat-icon fontSet="material-icons-outlined">picture_as_pdf</mat-icon>
+        </mat-button-toggle> -->
+        <mat-menu #columnMenu="matMenu">
+          <div cdkDropList class="mat-menu-list" (cdkDropListDropped)="columnMenuDropped($event)">
+            <div class="item-box" *ngFor="let column of columnInfo; let i = index" cdkDrag
+              [cdkDragData]="{columnIndex: i, columnTitle: column.id}">
+              <mat-checkbox [checked]="!column.hidden" (click)="$event.stopPropagation();"
+                (change)="toggleSelectedColumn(column.key)">
+                {{ column.display}}
+              </mat-checkbox>
+            </div>
+          </div>
+        </mat-menu>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+  <!--  sub header end-->
+  <!-- grid table start -->
+  <div class="mainTable">
+    <table mat-table matSort [dataSource]="dataSource" [ngClass]="showSearch ? 'openSearch' : ''"
+      class="Data_table table-striped">
+      <ng-container *ngFor="let col of tableCols; let i = index" [matColumnDef]="col.key">
+        <!-- thead start-->
+        <th mat-header-cell *matHeaderCellDef class="{{col.key}}">
+          <span *ngIf="col.key !== 'select'" [disabled]="!col.sort" [mat-sort-header]>
+            {{ tableCols[i]["display"] }}
+          </span>
+          <ng-container *ngIf="col.sort&&!col.hidden && showSearch">
+            <div>
+              <input matInput class="form-field filtersearch" type="text"
+                (keyup)="filterData(col.key,$event.target.value)" placeholder="Search">
+            </div>
+          </ng-container>
+          <ng-container *ngIf="col.key === 'select'">
+            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+          </ng-container>
+        </th>
+
+      <!-- thead end-->
+      <!-- tbody start-->
+      <td mat-cell *matCellDef="let element ;let j =index" class="{{col.key}}" (click)="rowClickEvent(element)">
+        <ng-container *ngIf="col.key === 'select'">
+          <mat-checkbox (click)="checkboxSelect(element)" (change)="$event ? selection.toggle(element) : null"
+            [checked]="selection.isSelected(element)" [aria-label]="checkboxLabel(element  )">
+          </mat-checkbox>
+        </ng-container>
+        <!--  Checking if it's a normal column or column with specific config -->
+        <ng-container *ngIf="!col.config; else hasConfig">
+          <span>
+            {{ element[col.key] }}
+          </span>
+        </ng-container>
+        <!-- If this column has a config object so we will display depending on our sitted config -->
+        <ng-template #hasConfig>
+          <!-- if this attribute is a boolean, we will show values from config object depending on his state -->
+          <!-- Index -->
+          <ng-container *ngIf="col.config.isIndex">
+            {{j+1}}
+          </ng-container>
+          <!-- if this attribute is a date, we will format it depending on format value in config object -->
+          <ng-container *ngIf="col.config.isDate">
+            {{ element[col.key] | date: col.config.format }}
+          </ng-container>
+          <ng-container *ngIf="col.config.isTime">
+            {{ element[col.key] | date: col.config.format }}
+          </ng-container>
+          <!--  to access inner data -->
+          <ng-container *ngIf="col.config.isInner">
+            {{ element[col.key][col.config.innerKey]}}
+          </ng-container>
+
+          <!-- to show status -->
+          <ng-container *ngIf="col.config.isStatus">
+            <span [ngClass]="element[col.key] === 'Active' ? 'active' : 'inActive'"> {{ element[col.key] }} </span>
+          </ng-container>
+
+
+          <!--  to  show image -->
+          <!-- <ng-container *ngIf="col.config.isImage">
+            <img *ngIf="element[col.key] !==null" [src]="element[col.key]" class="imageClass"
+              alt="./assets/images/paf-logo.png" />
+            <img *ngIf="element[col.key] === null" src="./assets/images/no-image.png" class="imageClass"
+              alt="./assets/images/paf-logo.png" />
+          </ng-container> -->
+
+          <!--  to  show image -->
+          <ng-container *ngIf="col.config.trueFalseAction">
+            <mat-slide-toggle [checked]="element[col.key]"
+              (click)="actionHandlerTogle(action,element)"></mat-slide-toggle>
+          </ng-container>
+
+          <!-- draft -->
+          <ng-container *ngIf="col.config.checkDraft">
+            {{ element[col.key] }}
+            <!-- {{element[col.config.parameterName]}} -->
+            <span *ngIf="element[col.config.parameterName]" class="draft text-danger"> (Draft) </span>
+          </ng-container>
+
+          <!--  to show pdf -->
+          <span *ngIf="col.config.isPdf && col.config.isClickAble " (click)="pdf(element)">
+            <!-- <img src="./assets/images/pdf-logo.png" class="imageClass" alt="'image'" class="imageClass pointer"/> -->
+            <button class="btn btn-primary">
+              <span>Print</span>
+            </button>
+          </span>
+
+
+          <!--  to  show image -->
+          <ng-container *ngIf="col.config.isImage && !col.config.isClickAble ">
+            <img *ngIf="element[col.key] !==null" [src]="element[col.key]" class="imageClass"
+              alt="./assets/images/paf-logo.png" />
+            <img *ngIf="element[col.key] === null" src="../../../../assets/images/Noimage.jpg" class="imageClass"
+              alt="image" />
+          </ng-container>
+
+          <!--QR image code  (click)="rowClickEvent(element)"-->
+          <span *ngIf=" col.config.isImage && col.config.isClickAble " (click)="actionHandler(action,element)"
+            class="texthead">
+            <img *ngIf="element[col.key] !==null" [src]="element[col.key]" class="imageClass pointer"
+              alt="./assets/images/paf-logo.png" />
+            <img *ngIf="element[col.key] === null" src="../../../../assets/images/Noimage.jpg" class="imageClass"
+              alt="image" />
+            <!-- <p>test</p> -->
+          </span>
+
+          <!-- if this column is action, we will loop through each action and show it as a mat-button -->
+          <ng-container *ngIf="col.config.isAction">
+            <!-- <button *ngFor="let action of col.config.actions" (click)="emitter.emit(action)" mat-button>{{action}}</button> -->
+            <button mat-icon-button *ngFor="let action of col.config.actions" matTooltip="{{action}}"
+              class="{{action}} actionBtn" (click)="actionHandler(action,element)" >
+              <mat-icon fontSet="material-icons-outlined" class="icon-edit"><span>{{action}}</span></mat-icon>
+            </button>
+          </ng-container>
+
+
+          <ng-container *ngIf="col.config.isbutton && (element.locationData || element.isActiveOrDeactive)">
+            <select #actionDropdown class="action-controller"
+              (change)="actionHandler($event, element); actionDropdown.selectedIndex = 0">
+              <option value="" disabled selected class="disabled-option">Select Action</option>
+              <option *ngFor="let action of col.config.actions ; let index =i" class="action-option" [value]="action">
+                <ng-container *ngIf="action === 'lock'">
+                  <span *ngIf="element.device_lock_and_unlock_status == 1">lock</span>
+                  <span *ngIf="element.device_lock_and_unlock_status == 2">Unlock</span>
+                  <span *ngIf="element.device_lock_and_unlock_status == 3">UnLock</span>
+                </ng-container>
+
+                <ng-container *ngIf="action === 'Light'">
+                  <span *ngIf="element.deviceLightStatusEnumId == 42">Light On</span>
+                  <span *ngIf="element.deviceLightStatusEnumId == 41">Light Off</span>
+                </ng-container>
+
+                <ng-container *ngIf="action === 'POWER_ON_OFF'">
+                  <span *ngIf="+element.powerOnOffStatusEnumId === 97">Power On</span>
+                  <span *ngIf="+element.powerOnOffStatusEnumId === 96">Power Off</span>
+                </ng-container>
+
+                <ng-container *ngIf="action === beep">
+                  <span *ngIf="element.beepStatusEnumId == 55">Beep On</span>
+                  <span *ngIf="element.beepStatusEnumId == 54">Beep Off</span>
+                </ng-container>
+
+                <ng-container *ngIf="action === 'Active'">
+                  <span *ngIf="element.statusEnumId == 1">Deactive</span>
+                  <span *ngIf="element.statusEnumId == 2">Active</span>
+                </ng-container>
+
+                <ng-container *ngIf="action == 'Publish'">
+                  <span *ngIf="element.faqPublishStatusEnumId == 88">Publish</span>
+                  <span *ngIf="element.faqPublishStatusEnumId == 87">Unpublish</span>
+                </ng-container>
+
+                <span
+                  *ngIf="action !== 'lock' && action !== 'POWER_ON_OFF' && action !== 'Light' && action !== beep && action !== 'Active' && action !== 'Publish'">{{action}}</span>
+              </option>
+            </select>
+          </ng-container>
+        </ng-template>
+      </td>
+      <!-- tbody end-->
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="keys; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: keys"></tr>
+    </table>
+    <div *ngIf="!data.length" class="text-center no_data">
+      <h5 class="mb-0">No Record Found</h5>
+    </div>
+    <!-- pagination start -->
+    <mat-paginator [hidden]="!data.length" [pageSize]="25" [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons
+      class="mat-paginator-sticky pagination_set">
+    </mat-paginator>
+    <!-- pagination end -->
+  </div>
+  <!-- grid table end -->
+</div>

@@ -1,0 +1,31 @@
+<div class="containers ">
+  <mat-card>
+    <div class="d-flex justify-content-between pt-2">
+      <div class="info ps-2 pt-2 ">
+        <p class="mb-0 pe-3 ">IOT Device: <b>{{this.data.lockNumber}}</b> <br> 
+        <!-- Model : <b>{{this.data.modelName}}</b> -->
+         </p>
+      </div>
+        <button class="btn-close pe-3" mat-dialog-close></button>
+    </div>
+    <mat-dialog-content>
+      <p> Model : <span>{{this.data.modelName}}</span></p>
+      <p>Vehicle UID : <span> {{data.vehicleModelUId}}</span></p>
+      <p>lock IMEI Number : <span>{{data.lockIMEINumber}}</span></p>
+      
+    <label for="name" class="pb-1">Qr Number:</label> 
+      <input  id="name" name="name"  class="form-control" placeholder="enter Qr Number" [type]="'text'" [(ngModel)]="qrNumber" #name="ngModel" required />
+      <div *ngIf="name.invalid && (name.dirty || name.touched)"
+      class="alert alert-danger">
+  
+                  <!-- <div *ngIf="name.errors?.['required']"> -->
+                    Qr Number: is required.
+                  <!-- </div> -->
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="text-right text-end">
+      <button type="button" class="btn btn-primary savebtn" (click)="save()" [disabled]="!qrNumber">Update</button>
+  </mat-dialog-actions> 
+
+</mat-card> 
+</div>

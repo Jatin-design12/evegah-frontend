@@ -1,0 +1,18 @@
+<section > 
+     <mat-dialog-header>
+        <h4 class="mb-0">User Transaction Detail</h4>
+        <button type="button" class="btn-close" (click)="closemodel()"></button>
+    </mat-dialog-header>
+   <!-- <mat-dialog-content> -->
+        <!-- <h5>will you want to end this ride ?</h5> -->
+        <!-- <input [label]="'enter Remark'" [type]="'text'" [(ngModel)]="remark"> -->
+    <!-- </mat-dialog-content> -->
+    <!-- <mat-dialog-actions class="text-right">
+        <button type="button" class="btn savebtn" (click)="endRideBike()">End Ride</button>
+    </mat-dialog-actions>  -->
+    <mat-card class="mainCard card_set p-0">
+        <mat-card-content class="card-body p-0"> 
+            <app-table [cols]="cols" [data]="transactionData" (onAction)="onActionHandler($event)"></app-table> 
+        </mat-card-content>
+    </mat-card>
+</section>

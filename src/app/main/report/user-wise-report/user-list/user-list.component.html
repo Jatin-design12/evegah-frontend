@@ -1,0 +1,71 @@
+<!--  App Sub Header Start-->
+<app-sub-header [heading]="'User Wise Earning Report'" [icon]="'supervisor_account'"></app-sub-header>
+<!--  App Sub Header End-->
+
+<!-- User Transaction List Main body End -->
+<section class="main-body bike">
+    <div class="card p-3">
+        <form [formGroup]="UserFilterForm">
+            <div class="row justify-content-between">
+                <div class="col-md-3">
+                    <app-date [label]="'From Date'" formControlName="fromDate"></app-date>
+                </div>
+                <div class="col-md-3">
+                    <app-date [label]="'To Date'" formControlName="toDate"></app-date>
+                </div>
+                <div class="col-md-3">
+                    <app-input [type]="'text'" [label]="'Enter User name'" formControlName="userName"> </app-input>
+                </div>
+                <div class="col-md-3 ">
+                    <app-input [type]="'Number'" [label]="'Enter Mobile Number'" formControlName="mobile"> </app-input>
+                </div>
+                <div class="col-md-3 ">
+                    <app-input [type]="'text'" [label]="'Enter IOT Device Number'" formControlName="lockNumber"> </app-input>
+                </div>
+                <div class="col-md-3">
+                    <app-select-dropdown [config]="stateDropdown" [items]="stateData" (selectionChange)="getCitys()"
+                      formControlName="mapStateId">
+                    </app-select-dropdown>
+                  </div>
+                  <div class="col-md-3 ">
+                    <app-select-dropdown [config]="cityDropdown" [items]="cityData" formControlName="mapCityId" >
+                    </app-select-dropdown>
+                  </div>
+                  <div class="col-md-3">
+                    <app-select-dropdown [config]="areaTypeDropdown" formControlName="startAreaTypeEnumId"
+                        [items]="areaTypeData" (selectionChange)="getAreaList()">
+                    </app-select-dropdown>
+                </div>
+                <div class="col-md-3">
+                    <app-select-dropdown [config]="areaDropdown" formControlName="startAreaId" [items]="areaList" (selectionChange)="getZoneList()"></app-select-dropdown>
+                  </div>
+                  <div class="col-md-3">
+    
+      <app-select-dropdown [config]="zoneDropdown" [items]="zoneData" formControlName="startZoneId">
+                    </app-select-dropdown>
+                </div>
+                <div class="col-md-3">
+                    <app-select-dropdown [config]="areaDropdownEnd" formControlName="endAreaId" [items]="areaList" (selectionChange)="getZoneList()"></app-select-dropdown>
+                  </div>
+                  <div class="col-md-3">
+    
+      <app-select-dropdown [config]="zoneDropdownEnd" [items]="zoneData" formControlName="endZoneId">
+                    </app-select-dropdown>
+                </div>
+               
+            </div>
+            <div class="text-end">
+                <app-button [label]="'Select'" [class]="'btn btn-primary'" (click)="submit()" >
+                 
+                </app-button>
+            </div>
+        </form>
+    </div>
+    <mat-card class="mainCard card_set p-0 mt-4">
+        <mat-card-content class="card-body p-0">
+            <app-table [cols]="cols" [data]="tableData" (onAction)="onActionHandler($event)"
+                [excelName]="'User Wise Earning Report'"></app-table>
+        </mat-card-content>
+    </mat-card>
+</section>
+<!-- User Transaction List Main body End -->

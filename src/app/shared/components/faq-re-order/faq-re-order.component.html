@@ -1,0 +1,151 @@
+<section class="text-center container" >
+   
+    <mat-dialog-header class="d-flex justify-content-between p-3">
+        <h4 class="mb-0"> Reorder the Faq</h4>
+
+        <button type="button" class="btn-close" (click)="closemodel()"></button>
+    </mat-dialog-header>
+    <ng-container *ngIf="!isSection">
+      <form [formGroup]="faqForm" > 
+        <div class="row noMarginmatField justify-content-start  align-items-start"> 
+           <div class="col-md-3 ">
+               <app-select-dropdown [config]="sectionDropdown" formControlName="sectionId" [items]="sectionData" (selectionChange)="getTableData($event)">
+               </app-select-dropdown>
+           </div>
+           <div class="col-md-6">
+            <p class="note">* You can change the sequence by drag and drop from the <mat-icon> swap_vertical_circle</mat-icon> </p>
+          </div>
+        </div>
+    </form>
+    </ng-container>
+    <ng-container *ngIf="isSection">
+      <p class="note">* You can change the sequence by drag and drop from the <mat-icon> swap_vertical_circle</mat-icon> </p>
+    </ng-container>
+    
+    <mat-card class="faq-reorder">
+    <mat-dialog-content class="text-center  faq"> 
+
+      <!-- Table for faq Section -->
+      <ng-container *ngIf="isSection" > 
+        <table mat-table #table [dataSource]="tableData" class="mat-elevation-z8 mt-2 text-start "
+        cdkDropList
+        [cdkDropListData]="tableData"
+        (cdkDropListDropped)="dropTable($event)">
+      
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>Move </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon style="pointer-events: all;"
+            cdkDragHandle >
+            swap_vertical_circle
+            <!-- swap_vert -->
+        </mat-icon>
+          </td>
+        </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="no">
+            <th mat-header-cell *matHeaderCellDef>S.no </th>
+            <td mat-cell *matCellDef="let element ; let i =index">
+              {{i+1}}
+            </td>
+          </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="sectionName">
+          <th mat-header-cell *matHeaderCellDef>Section </th>
+          <td mat-cell *matCellDef="let element"> {{element.sectionName}} </td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+       
+         <!-- Symbol Column -->
+         <ng-container matColumnDef="sectionSequence">
+            <th mat-header-cell *matHeaderCellDef>Sequence </th>
+            <td mat-cell *matCellDef="let element"> {{element.sectionSequence}} </td>
+          </ng-container>
+        
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsSection"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsSection;" 
+        style="pointer-events: none;"
+        cdkDrag [cdkDragData]="row"></tr>
+      </table>
+      </ng-container>
+
+      <!-- Table for faq Question  -->
+      <ng-container *ngIf="!isSection">
+      
+        <table mat-table #table [dataSource]="tableData" class="mat-elevation-z8 mt-2 text-start "
+        cdkDropList
+        [cdkDropListData]="tableData"
+        (cdkDropListDropped)="dropTable($event)">
+      
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>Move </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon style="pointer-events: all;"
+            cdkDragHandle >
+            swap_vertical_circle
+            <!-- swap_vert -->
+        </mat-icon>
+          </td>
+        </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="no">
+            <th mat-header-cell *matHeaderCellDef>S.no </th>
+            <td mat-cell *matCellDef="let element ; let i =index">
+              {{i+1}}
+            </td>
+          </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="question">
+          <th mat-header-cell *matHeaderCellDef>Question </th>
+          <td mat-cell *matCellDef="let element"> {{element.question}} </td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="answer">
+          <th mat-header-cell *matHeaderCellDef> Answer </th>
+          <td mat-cell *matCellDef="let element"> {{element.answer}} </td>
+        </ng-container>
+      
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="faqPublishStatusEnumName">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.faqPublishStatusEnumName}} </td>
+        </ng-container>
+         <!-- Symbol Column -->
+         <ng-container matColumnDef="questionSequence">
+            <th mat-header-cell *matHeaderCellDef> Question Sequence </th>
+            <td mat-cell *matCellDef="let element"> {{element.questionSequence}} </td>
+          </ng-container>
+        
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+        style="pointer-events: none;"
+        cdkDrag [cdkDragData]="row"></tr>
+      </table>
+      </ng-container>
+        
+
+      
+    
+    </mat-dialog-content>
+</mat-card>
+<div class="row justify-content-end mb-2 me-3">
+    <div class="col-md-4 mt-2 text-end" >
+        <app-button [label]="'Save Reorder'" [class]="'btn btn-primary'" (click)="SaveNewOrder()">
+        </app-button>
+    </div>
+  </div>
+</section>

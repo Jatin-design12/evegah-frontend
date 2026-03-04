@@ -1,0 +1,39 @@
+<mat-dialog-header>
+    <h4 class="mb-0">Ride Rating {{data.bikeData.action}} Modal</h4>
+    <button type="button" class="btn-close" (click)="closemodel()"></button>
+</mat-dialog-header>
+<mat-dialog-content>
+
+
+    <p><span class="para-heading">Ride Booking No. :</span> <span> {{data.bikeData.data.rideBookingNo}}</span></p>
+    <p><span class="para-heading">Vehicle model :</span> <span>{{ data.bikeData.data.modelName}}</span></p> 
+
+    <p><span class="para-heading">User Name : </span><span>{{data.bikeData.data.userName}}</span></p>
+    <p><span class="para-heading">Mobile No. :</span> <span>{{data.bikeData.data.mobile}}</span></p>
+
+
+    <p> <span class="para-heading">Start Date :</span><span>{{ data.bikeData.data.fromRideTime | date:'dd-MM-yyyy, h:mm a'}}</span><br>   <span class="para-heading">End Date</span> <span>{{ data.bikeData.data.toRideTime | date: 'dd-MM-yyyy, hh:mm:a'}}</span></p>
+    <p> <span class="para-heading">Start Zone :</span><span>{{ data.bikeData.data.rideStartZone}}</span><br><span class="para-heading">End Zone</span>  {{ data.bikeData.data.rideEndZone}}</p>
+  
+    <p><span class="para-heading"> Rating :</span><span>{{ data.bikeData.data.rideRating}}</span></p>
+    <p><span class="para-heading">Comment :</span> <span>{{ data.bikeData.data.rideComments}}</span></p>
+
+
+    
+    
+    Reply:
+    <textarea  id="name" name="name"  class="form-control"[label]="'enter Reply'" [type]="'text'" [(ngModel)]="remark" #name="ngModel" required ></textarea>
+    <div *ngIf="name.invalid && (name.dirty || name.touched)"
+    class="alert alert-danger">
+
+                <!-- <div *ngIf="name.errors?.['required']"> -->
+                   Reply is required.
+                <!-- </div> -->
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="text-right">
+    <button type="button" class="btn savebtn" (click)="save()" [disabled]="!remark">Done</button>
+</mat-dialog-actions> 
+
+
+

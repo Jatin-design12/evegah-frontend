@@ -1,0 +1,95 @@
+<!--App Sub Header Start -->
+<app-sub-header [heading]="heading " [icon]="'arrow_back'" (onBackIcon)="backButton()"></app-sub-header>
+<!--App Sub Header End -->
+
+<!-- Add Category Main body Start -->
+<section class="main-body">
+  <mat-card class="mainCard zone-card-master">
+    <div class="row">
+      
+      <div class="col-md-12 mt-2 " >
+        <form [formGroup]="createZoneForm">
+          <mat-card-content class="card-body">
+            <div class="row">
+              <div class="col-md-3">
+                <app-select-dropdown [config]="stateDropdown" [items]="stateData" (selectionChange)="getCitys()"
+                  formControlName="stateId">
+                </app-select-dropdown>
+              </div>
+              <div class="col-md-3">
+                <app-select-dropdown [config]="cityDropdown" [items]="cityData" formControlName="cityId" (selectionChange)="getAreabyCity($event)">
+                </app-select-dropdown>
+              </div>
+              <div class="col-sm-3">
+                <app-select-dropdown [config]="areaTypeDropdown" formControlName="areaTypeId"
+                    [items]="areaTypeData" (selectionChange)="selectAreaType($event)">
+                </app-select-dropdown>
+            </div>
+              <div class="col-md-3">
+                <app-select-dropdown [config]="areaDropdown" formControlName="areaId" [items]="areaData" (selectionChange)="getAreaCityForMap($event)"></app-select-dropdown>
+              </div>
+              <div class="col-md-3">
+                <app-input [label]="'Enter Zone Name'" [hint]="'Max 30 Character'" [type]="'text'"
+                  formControlName="name"></app-input>
+              </div>
+              
+              
+              <div class="col-md-6">
+                <app-textarea formControlName="zoneAddress" [label]="'Enter Zone Address'">
+                </app-textarea>
+              </div>
+              <div class="col-md-3">
+                <app-input [label]="'Enter Zone Size (Sq. Feet)'" [type]="'number'" formControlName="zoneSize"></app-input>
+              </div>
+              <div class="col-md-2">
+                <app-input [label]="'Enter Zone Capacity'" [type]="'number'" formControlName="zoneCapacity">
+                </app-input>
+              </div>
+              <div class="col-md-3">
+                <app-input [label]="'Get Latitude From Map Area '" [type]="'number'" formControlName="latitude" [readonly]="'true'"></app-input>
+              </div>
+              <div class="col-md-3">
+                <app-input [label]="'Get Longitude From  Map Area '" [type]="'number'" formControlName="longitude" [readonly]="'true'"></app-input>
+              </div>
+              <div class="col-md-4">
+                
+                <!-- <form [formGroup]="createZoneForm"> -->
+                  <mat-card-actions class="pt-2" *ngIf="!viewMode">
+                    <app-button [label]="'Cancel'" [class]="'btn secondary ml-auto'" (click)="cancleZone()">
+                    </app-button>
+                    <app-button [label]="'Save'" (click)="saveZone()" [class]="'btn btn-primary'"
+                    [disabled]="createZoneForm.invalid"></app-button>
+                  </mat-card-actions>
+                <!-- </form> -->
+              </div>
+              
+              
+            <p class="note">* Note - You can create/Tag zone inside selected area into map by mouse left click event, if map is not visible , Please allow the location in browser .</p>
+            </div>
+          </mat-card-content> 
+          <!-- <mat-card-actions class="p-0" *ngIf="!viewMode">
+            <app-button [label]="'Cancel'" [class]="'btn secondary ml-auto'" (click)="cancleZone()">
+            </app-button>
+            <app-button [label]="'Save'" (click)="saveZone()" [class]="'btn btn-primary'"></app-button>
+          </mat-card-actions> -->
+        </form>
+      </div>
+      <div class="col-md-12">
+        <div class="map">
+          <app-search-location [data]="areaMapData" [oldZoneData]="allZoneData"[editViewData]="editData" [isChange]="isChangeMap"  [cityandStateChange]="cityandStateChange" (nameEmitter)="receivename($event)" (latlngEmitter)="latlngReceive($event)">
+          </app-search-location>
+        </div>
+      </div>
+      <!-- <div class="col-md-12 p-0">
+        <form [formGroup]="createZoneForm">
+          <mat-card-actions class="pt-2" *ngIf="!viewMode">
+            <app-button [label]="'Cancel'" [class]="'btn secondary ml-auto'" (click)="cancleZone()">
+            </app-button>
+            <app-button [label]="'Save'" (click)="saveZone()" [class]="'btn btn-primary'"></app-button>
+          </mat-card-actions>
+        </form>
+      </div> -->
+    </div>
+  </mat-card> 
+</section>
+<!-- Add Category Main body End -->

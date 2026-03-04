@@ -1,0 +1,231 @@
+<!--App Sub Header Start -->
+<app-sub-header [heading]="heading" [icon]="'arrow_back'" (onBackIcon)="backButton()"></app-sub-header>
+<!--App Sub Header End -->
+<!-- Add Category Main body Start -->
+<section class="main-body">
+    <mat-card class="mainCard zone-card-masrer p-0">
+        <mat-card-content class="card-body p-4">
+            <div class="row">
+                <form [formGroup]="farePlanMasterFrom" *ngIf="!this.viewMode ">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <app-select-dropdown [config]="stateDropdown" formControlName="stateId" [items]="stateData"
+                                (selectionChange)="getCity($event)">
+                            </app-select-dropdown>
+                        </div>
+                        <div class="col-sm-3">
+                            <app-select-dropdown [config]="cityDropdown" formControlName="cityId" [items]="cityData"
+                                (selectionChange)=" selectAreaName($event)">
+                            </app-select-dropdown>
+                        </div>
+                        <div class="col-sm-3">
+                            <app-select-dropdown [config]="areaTypeDropdown" formControlName="areaTypeId"
+                                [items]="areaTypeData" (selectionChange)="selectAreaType($event)">
+                            </app-select-dropdown>
+                        </div>
+                        <div class="col-sm-3" *ngIf="isAreaClosed">
+                            <app-select-dropdown [config]="areaDropdown" formControlName="areaId" [items]="areaData">
+                            </app-select-dropdown>
+                        </div>
+                        <div class="col-sm-3 mb-3">
+                            <app-select-dropdown [config]="vehicleTypeDropdown" formControlName="vehicleTypeId"
+                                [items]="vehicleTypeData" (selectionChange)="selectBikeModel($event)">
+                            </app-select-dropdown>
+                        </div>
+                        <div class="col-sm-3 mb-3">
+                            <app-select-dropdown [config]="bikeModelDropdown" formControlName="modelId"
+                                [items]="bikeModelData">
+                            </app-select-dropdown>
+                        </div>
+                        <div class="col-sm-3">
+                            <app-input [label]="'Enter Min. Hire Time'" [type]="'number'" formControlName="hireTime"
+                                (onChange)="checkHire()"></app-input>
+                        </div>
+
+
+                        <!-- <div class="col-sm-3">
+                            <app-date formControlName="toDate" [label]="'Applicable To Date'"></app-date>
+                        </div> -->
+
+                        <div class="col-sm-3">
+                            <app-input [label]="'Per Minute Rate for Monday '" [type]="'number'"
+                                formControlName="minRateMonday"></app-input>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <app-input [label]="'Per Minute Rate for Tuesday '" [type]="'number'"
+                                formControlName="minRateTuesday"></app-input>
+                        </div>
+                        <div class="col-sm-3">
+                            <app-input [label]="'Per Minute Rate for Wednesday '" [type]="'number'"
+                                formControlName="minRateWednesday"></app-input>
+                        </div>
+                        <div class="col-sm-3">
+                            <app-input [label]="'Per Minute Rate for Thursday '" [type]="'number'"
+                                formControlName="minRateThursday"></app-input>
+                        </div>
+                        <div class="col-sm-3">
+                            <app-input [label]="'Per Minute Rate for Friday '" [type]="'number'"
+                                formControlName="minRateFriday"></app-input>
+                        </div>
+                        <div class="col-sm-3">
+                            <app-input [label]="'Per Minute Rate for saturday '" [type]="'number'"
+                                formControlName="minRateSaturday"></app-input>
+                        </div>
+                        <div class="col-sm-3">
+                            <app-input [label]="'Per Minute Rate for sunday '" [type]="'number'"
+                                formControlName="minRateSunday"></app-input>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <app-date formControlName="fromDate" [label]="'Applicable From Date'"
+                                [minDate]="date"></app-date>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <app-input label="Select Time" [type]="'time'" formControlName="applyTime"
+                                (onChange)="checkTime($event)"></app-input>
+                        </div>
+
+
+                        <div class="col-md-12 text-end">
+                            <app-button    [label]="addBtn" [class]="'btn btn-primary'" type="submit"
+                                (click)="add()"></app-button>
+
+                
+                                <!-- <app-button *ngIf="addBtn =='Update'"  [label]="addBtn" [class]="'btn btn-primary'" type="submit"
+                                (click)="updateData()"></app-button>  *ngIf="addBtn =='Add'"-->
+                                
+                            <!-- [disabled]="farePlanMasterFrom.invalid" -->
+
+
+                        </div>
+
+
+                    </div>
+                </form>
+
+                <div class="col-md-12" *ngIf="tableData.length > 0 ">
+                    <div class="innerTable">
+                        <table class="table table-stiped table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>App. Date</th>
+                                    <th>App. Time</th>
+                                    <th>State</th>
+                                    <th>City</th>
+                                    <th>Area Type</th>
+                                    <th>Area Name</th>
+                                    <th>Vehicle Type</th>
+                                    <th>Vehicle Model</th>
+                                    <th>Min. Hire Time</th>
+                                    <th>Mon. Rate</th>
+                                    <th>Tue. Rate</th>
+                                    <th>Wed. Rate</th>
+                                    <th>Thu. Rate</th>
+                                    <th>Fri. Rate</th>
+                                    <th>Sat. Rate</th>
+                                    <th>Sun. Rate</th>
+                                    <th>Status</th>
+                                    <th *ngIf="!viewMode">Action</th>
+
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <ng-container *ngIf="!viewMode ">
+                                    <tr *ngFor=" let row of tableData; let i=index">
+                                        <!-- {{ row.stateName | json }}    
+                                        {{ row.cityName | json }}     -->
+
+                                        <td>{{i+1}} </td>
+                                        <td>{{row.formValue.fromDate | date: 'MM/dd/yyyy'}}</td>
+                                        <td>{{row.formValue.applyTime }}</td>
+                                        <td >{{row.stateName.mapStateName || row.stateName.state_name}}</td>
+                                        <td>{{row.cityName.mapCityName || row.cityName.city_name}}</td>
+                                        <td>{{row.areaTypeName.name}}</td>
+                                        <td *ngIf="!row.isArea"></td>
+                                        <td *ngIf="row.isArea">{{row.areaName.name || '---'}}</td>
+                                        <td>{{row.vehicleTypeName.vehicleTypeName}}</td>
+                                        <td>{{row.bikeModelName.modelName}}</td>
+                                        <td>{{row.formValue.hireTime}}</td>
+                                        <td>{{row.formValue.minRateMonday}}</td>
+                                        <td>{{row.formValue.minRateTuesday}}</td>
+                                        <td>{{row.formValue.minRateWednesday}}</td>
+                                        <td>{{row.formValue.minRateThursday}}</td>
+                                        <td>{{row.formValue.minRateFriday}}</td>
+                                        <td>{{row.formValue.minRateSaturday}}</td>
+                                        <td>{{row.formValue.minRateSunday}}</td>
+                                        <td>
+                                            <!-- <span>{{row.statusEnumId ==1 ? 'Active' : 'Deactive'}}</span> -->
+                                            <span *ngIf="editMode ; else active;">
+                                                {{row.statusEnumId ==1 ? 'Active' : 'Deactive'}}
+
+                                            </span>
+                                            <ng-template #active>
+                                                Active
+                                            </ng-template>
+                                        </td>
+                                        <td>
+                                            <span *ngIf="!editMode || row.isNewRecord " (click)="delete(row)">
+                                                <mat-icon>delete</mat-icon>
+                                            </span>
+                                            <!-- {{row.iseditModeNotEdit}} -->
+                                            <span *ngIf="row.iseditModeNotEdit" (click)="edit(row)">
+                                                <mat-icon>edit</mat-icon>
+                                            </span>
+
+                                            <span *ngIf="editMode">
+                                                <!-- *ngIf="row.isAlwayDeactive" -->
+                                                <mat-slide-toggle [(ngModel)]="row.isCheck"
+                                                    (click)="isActive(row)"></mat-slide-toggle>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+
+                                <!--   Veiw Mode -->
+                                <ng-container *ngIf="viewMode ">
+                                    <tr *ngFor=" let row of tableData; let i=index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{row.aplicableDate | date: 'MM/dd/yyyy'}}</td>
+                                        <td>{{this.getTime(row.aplicableDate)}}</td>
+                                        <td>{{row.stateName}}</td>
+                                        <td>{{row.mapCityName
+                                        }}</td>
+                                        <td>{{row.areaType}}</td>
+                                        <!-- <td *ngIf="!row.isArea"></td> -->
+                                        <td>{{row.areaName}}</td>
+                                        <td>{{row.vehicleTypeName}}</td>
+                                        <td>{{row.modeleName}}</td>
+                                        <td>{{row.hireTimeInMinuts}}</td>
+                                        <td>{{row.perMinuteRateMonday}}</td>
+                                        <td>{{row.perMinuteRateTuesday}}</td>
+                                        <td>{{row.perMinuteRateWednesday}}</td>
+                                        <td>{{row.perMinuteRateThursday}}</td>
+                                        <td>{{row.perMinuteRateFriday}}</td>
+                                        <td>{{row.perMinuteRateSaturday}}</td>
+                                        <td>{{row.perMinuteRateSunday}}</td>
+                                        <td>
+                                            {{row.statusEnumId ==1 ? 'Active' : 'Deactive'}}
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                                <!--   Veiw Mode -->
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions class="p-2" *ngIf="tableData.length > 0 && !this.viewMode ">
+            <app-button [label]="'Cancel'" [class]="'btn secondary ml-auto'" (click)=" backButton()">
+            </app-button>
+            <app-button [label]="'Save'" [class]="'btn btn-primary'" (click)="saveFarePlan()"></app-button>
+        </mat-card-actions>
+    </mat-card>
+
+</section>
+<!-- Add Category Main body End -->

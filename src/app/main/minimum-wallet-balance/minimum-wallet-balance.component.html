@@ -1,0 +1,57 @@
+<app-sub-header [heading]="' Set Minimum  Balance '" [icon]="'account_balance_wallet'"></app-sub-header>
+<!--  App Sub Header End [buttonLabel]="'Add Form'" [showButton]="'true'" (click)="openDialog()"-->
+
+<section class="main-body">
+    <section class="main-body">
+        <mat-card class="p-0 m-0 withdrawRequest">
+            <mat-tab-group animationDuration="0ms"  [(selectedIndex)]="demo1TabIndex">
+                <mat-tab label="Recharge Balance">
+                    <mat-card class="mainCard p-0">
+                        <mat-card-content class="card-body p-0">
+                            <div class="card p-3">
+                                <form [formGroup]="setMinWaalletBalForm">
+                                    <div class="row noMarginmatField">
+                                        <div class="col-sm-8">
+                                            <app-input [label]="'Set Minimum Recharge Balance'" [type]="'text'" formControlName="MinWaalletBal">
+                                            </app-input>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <app-button [label]="'Update Minimum Recharge Balance'" [class]="'btn btn-primary'" type="submit"
+                                                (click)="addMinWaalletBal(107)"></app-button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <app-table [cols]="cols1" [data]="RidingbalanceList"
+                                (onCheckboxEvent)="onRowActioHandler($event)"></app-table>
+                        </mat-card-content>
+                    
+                    </mat-card>
+                </mat-tab>
+                <mat-tab label="Security Deposit">
+                    <mat-card class="mainCard p-0"> 
+                        <mat-card-content class="card-body p-0"> 
+                            <div class="card p-3">
+                                <form [formGroup]="setMinWaalletBalForm">
+                                    <div class="row noMarginmatField">
+                                        <div class="col-sm-8">
+                                            <app-input [label]="'Set Security  Deposit'" [type]="'text'" formControlName="MinWaalletBal">
+                                            </app-input>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <app-button [label]="'Update  Security Deposit'" [class]="'btn btn-primary'" type="submit"
+                                                (click)="addMinWaalletBal(25)"></app-button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <app-table [cols]="cols2" [data]="SecuritybalanceList" [pendingtotal] = "true" (onCheckboxEvent)="onRowActioHandler($event)"></app-table> 
+    
+                        </mat-card-content> 
+                      
+                    </mat-card>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card>
+    </section>
+</section>

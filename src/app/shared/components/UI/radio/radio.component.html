@@ -1,0 +1,20 @@
+<!-- <mat-form-field   floatLabel="always" appearance="outline" class="full-width radio-container" > -->
+<mat-label mat-label> {{ config.label}} </mat-label>
+<mat-radio-group (change)="onChange($event.value)" [disabled]="disabled" [required]="config.required"
+  [(value)]="selected">
+  <mat-radio-button #button class="radio-button" *ngFor="let item of items" [value]="item[config.key]">
+    <span class="wrap-label-text">
+      {{item[config.displayKey]}}
+    </span>
+  </mat-radio-button>
+
+</mat-radio-group>
+<div *ngIf="(controlDir && controlDir.control && !controlDir.control.valid
+&& controlDir.control.touched)">
+  <mat-hint class="error" *ngIf="controlDir.control.errors?.required">{{config.label}} is required</mat-hint>
+  <mat-hint class="error" *ngIf="(!controlDir.control.errors?.required && controlDir.control.invalid)">{{label}} is
+    Invalid</mat-hint>
+</div>
+<!-- <mat-hint>Choose something</mat-hint>
+  <mat-error> 'error' </mat-error> -->
+<!-- </mat-form-field> -->

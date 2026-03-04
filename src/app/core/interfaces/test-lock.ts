@@ -1,0 +1,23 @@
+export interface ITestLock {
+    "lockId": Number,
+    "lockNumber": String,
+    "registartionStatus": Boolean,
+    "statusEnumId": Number,
+    "statusName": String,
+    "latitude": string,
+    "longitude": String,
+    "altitude": String,
+    "speed": String,
+    "internalBatteryVoltage": String,
+    "externalBatteryVoltage": String,
+    "deviceLockAndUnlockStatus": Number,
+    "lockStatus": String,
+    "instructionId": Number,
+    "instructionName": String,
+    "allotmentStatusId": Number,
+    "allotmentStatus": String,
+    "deveiceStateEnumId": Number,
+    "deveiceState": String,
+    "createdonDate": String,
+    "lockIMEINumber": Number
+}

@@ -1,0 +1,12 @@
+<!--  App Sub Header Start-->
+<app-sub-header [heading]="'User Wallet'" [icon]="'folder_shared'"></app-sub-header>
+<!--  App Sub Header Start-->
+<!-- User List Main body Start -->
+<section class="main-body singleTable">
+    <mat-card class="mainCard p-0">
+        <mat-card-content class="card-body p-0">
+            <app-table [cols]="cols" [data]="userWallet" (onRowAction)="rowclick($event)" (onAction)="onActionHandler($event)"></app-table> 
+        </mat-card-content>
+    </mat-card>
+</section>
+<!-- User List Main body End -->

@@ -1,0 +1,35 @@
+<mat-sidenav-container class="sidenav-container" autosize>
+    <mat-sidenav #sidenav class="sidenav" [ngClass]="isExpanded ? 'open' : 'close'" mode="side" opened="true"
+        (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
+        <figure class="logo">
+            <button type="button" class="sidebar-toggle" (click)="burgerClick()" aria-label="Toggle sidebar">
+                <mat-icon>{{sidebar ? 'menu_open' : 'menu'}}</mat-icon>
+            </button>
+            <img src="../../../assets/images/company-logo.png" alt="logo" class="fullogo">
+            <!-- <p class="name fullogo">eVegah</p> -->
+            <!-- for metro --full-logo.svg -->
+            <img src="../../../assets/images/avatar.png" alt="icon" class="logoicon">
+            <!-- *ngIf="!isExpanded" -->
+        </figure> 
+
+  <!-- For metro E Mobility -->
+        <!-- <figure class="logo">
+            <p class="name fullogo ">Metro E Mobility</p>
+            <img src="../../../assets/images/avatar.png" alt="icon" class="logoicon">
+        </figure>  -->
+
+        
+        <mat-nav-list>
+            <ng-container  *ngFor="let item of navItems">
+                <app-menu-list-item [item]="item"></app-menu-list-item>
+            </ng-container>
+        </mat-nav-list>
+        <div class="footer-sidebar">
+            <span>Copyright © 2026 Evegah Mobility Pvt Ltd. All rights reserved.</span>
+        </div>
+    </mat-sidenav>
+    <div class="sidenav-content">
+        <!-- <app-header></app-header> -->
+        <router-outlet></router-outlet>
+    </div>
+</mat-sidenav-container>

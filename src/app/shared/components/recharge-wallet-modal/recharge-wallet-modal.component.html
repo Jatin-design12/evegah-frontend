@@ -1,0 +1,30 @@
+<div class="header">
+  <h4 class="mb-0" *ngIf="data.rechargeType === 'Recharge Wallet'">Recharge Wallet</h4>
+  <h4 class="mb-0" *ngIf="data.rechargeType !== 'Recharge Wallet'">Add Security Deposit</h4>
+  <button type="button" class="btn-close" (click)="closeModal()"></button>
+</div>
+
+<form class="recharge-wallet-form" [formGroup]="rechargeWalletForm" (ngSubmit)="submitForm()">
+
+  <div class="form-group">
+    <label for="email">Amount</label>
+    <input [type]="'number'" class="form-control" id="amount" formControlName="amount" [placeholder]="'Enter amount'" />
+    <div *ngIf="rechargeWalletForm?.get('amount')?.invalid && rechargeWalletForm?.get('amount')?.touched"
+      class="text-danger">
+      Please enter a valid amount greater than zero.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Remark</label>
+    <textarea rows="3" class="form-control" id="remark" formControlName="remark"
+      [placeholder]="'Enter remark'"></textarea>
+    <div *ngIf="rechargeWalletForm?.get('remark')?.invalid && rechargeWalletForm?.get('remark')?.touched"
+      class="text-danger">
+      Please enter a remark
+    </div>
+  </div>
+
+  <button type="submit" class="btn rechargeBtn">Recharge</button>
+
+</form>

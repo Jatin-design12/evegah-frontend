@@ -1,0 +1,13 @@
+<!--App Sub Header Start -->
+<app-sub-header [heading]="heading" [icon]="'arrow_back'" (onBackIcon)="backButton()" [walletAmount] = "totalWalletAmount" [creditAmount] = "totalcreditAmount"></app-sub-header>
+<!--App Sub Header End -->
+
+<!-- User List Main body Start -->
+<section class="main-body">
+    <mat-card class="mainCard card_set p-0">
+        <mat-card-content class="card-body">
+            <app-table [cols]="cols" [data]="transctionDetailOfPerticularUser"></app-table> 
+        </mat-card-content>
+    </mat-card>
+</section>
+<!-- User List Main body End --> 

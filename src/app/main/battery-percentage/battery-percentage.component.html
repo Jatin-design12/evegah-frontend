@@ -1,0 +1,24 @@
+<app-sub-header [heading]="'Battery Percentage'" [icon]="'battery_unknown'"></app-sub-header>
+<!--  App Sub Header End [buttonLabel]="'Add Form'" [showButton]="'true'" (click)="openDialog()"-->
+
+<!-- Produce List Main body Start -->
+<section class="main-body">
+    <mat-card class="mainCard card_set p-0 mb-4">
+        <mat-card-header>
+            <mat-card-title>Batteries Under 20%</mat-card-title> 
+          </mat-card-header> 
+        <app-basic-table [cols]="cols" [data]="bikeBatteryStatusLessThenTwenty"  (onAction)="onActionHandler($event)"></app-basic-table> 
+    </mat-card>
+    <mat-card class="mainCard card_set p-0 mb-4">
+        <mat-card-header>
+            <mat-card-title>Batteries Over 21% and  Under 50%</mat-card-title> 
+          </mat-card-header>  
+        <app-basic-table [cols]="cols1" [data]="produceBikeBatteryStatusGraterThenTwentyAndLessThenFifty"  (onAction)="onActionHandler($event)" ></app-basic-table>    
+    </mat-card>  
+    <mat-card class="mainCard card_set p-0 mb-4">
+        <mat-card-header>
+            <mat-card-title>Batteries Over 51%</mat-card-title> 
+          </mat-card-header>  
+            <app-basic-table [cols]="cols2" [data]="produceBikeBatteryStatusGraterThenFifty"   (onAction)="onActionHandler($event)"></app-basic-table> 
+    </mat-card>
+</section> 

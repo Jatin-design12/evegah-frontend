@@ -1,0 +1,15 @@
+<!--App Sub Header Start -->
+<app-sub-header [heading]="'Area List'" [icon]="'category'" [buttonLabel]="'Add New Area'" [showButton]="'true'"
+    (onClick)="navigateToMaster($event)"></app-sub-header>
+<!--App Sub Header End -->
+
+<!-- User List Main body Start -->
+<section class="main-body singleTable">
+    <mat-card class="mainCard card_set p-0">
+        <mat-card-content class="card-body">
+    <!-- <app-draw-area></app-draw-area> --> 
+            <app-table [cols]="cols" [data]="areaData" [excelName]="'Area List'" (onRowAction)="onRowActioHandler($event)" (onAction)="onActionHandler($event)"></app-table> 
+        </mat-card-content>
+    </mat-card>
+</section>
+<!-- User List Main body End --> 

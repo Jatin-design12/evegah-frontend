@@ -1,0 +1,96 @@
+section .container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  #map {
+    height: 100% !important;
+    min-height: 500px;
+    width: 100%;
+    // max-width:500px;
+  }
+
+  input {
+    position: absolute;
+    top: 15px !important;
+    z-index: 1;
+    width: 100%;
+    padding: 10px;
+    left: 25px !important;
+
+    outline: none;
+    box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px -1px;
+    border: none;
+    margin-left: 0px;
+    max-width: 250px;
+  }
+
+  /* height: 1000%; */
+}
+
+.map-right-Border .btn {
+  margin-left: 20px;
+  margin-top: 2px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.getAddress {
+  margin-left: 20px;
+  margin-top: 2px;
+  margin-bottom: 0px;
+  font-size: 13px;
+}
+
+.btns {
+  display: block;
+  .btn-div {
+    display: flex;
+  // justify-content: space-between;
+    app-textarea {
+        width: 85%;
+        mat-form-field {
+          margin-bottom: 0 !important;
+          height: 50px;
+      }
+    }
+
+    button {
+        width: 15%;
+        margin-left:0px !important;
+        height: 55px;
+    border-right: 0;
+    }
+
+}
+  .note{
+    font-size:13px;
+    color:red;
+    margin-left:0px;
+    margin-bottom: 10px;
+
+  }
+  button.btn.btn-danger.getAddress {
+    position: relative;
+   top: -124px;
+    // width: 150px;
+    right: 73px;
+    height: 42px;
+    opacity: .9;
+}
+}
+.note{
+  color:red;
+  font-size: 13px;
+}
+.map-section{
+  position: relative;
+
+  .DeleteBtn{
+    position: absolute;
+    right: 73px;
+    z-index: 2;
+    top: 10px;
+    height: 37px;
+  }
+}

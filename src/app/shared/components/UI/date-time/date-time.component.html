@@ -1,0 +1,7 @@
+<mat-form-field>
+    <mat-label>{{label}}</mat-label>
+    <mat-datetimepicker-toggle [for]="dts" matSuffix></mat-datetimepicker-toggle>
+    <mat-datetimepicker #dts type="datetime" openOnFocus="true" (input)="onChange($event)" timeInterval="5"></mat-datetimepicker>
+    <input matInput readonly (dateChange)="onChange($event.target.value)" [matDatetimepicker]="dts" autocomplete="false">
+
+</mat-form-field>

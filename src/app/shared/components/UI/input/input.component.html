@@ -1,0 +1,19 @@
+<!-- Mat input component Start-->
+<mat-form-field appearance="outline">
+  <mat-label class="label">{{label}}</mat-label>
+  <input matInput #input [ngClass]="(controlDir && controlDir.control && controlDir.control.touched) ?
+    !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null" [type]="type" [required]="required"
+    (input)="onChange($event.target.value)" [readonly]="readonly" (blur)="onTouched()" [disabled]="disabled" placeholder="{{label}}" />
+    <mat-hint  class="hintContainer" [align]="'end'">
+    <span *ngIf="(controlDir && controlDir.control && !controlDir.control.valid
+    && controlDir.control.touched)">
+      <span class="error" *ngIf="controlDir.control.errors?.required">{{label}} is required</span>
+      <span class="error" *ngIf="(!controlDir.control.errors?.required && controlDir.control.invalid)">{{label}} is
+        Invalid</span>
+        <span *ngIf="controlDir.hasError('whitespace')">tyutyrtyrtyr</span>
+      </span>
+      <!-- <span *ngIf="!controlDir.control.invalid" class="hintText text-success">{{hint}}</span> -->
+    </mat-hint>
+</mat-form-field>
+
+<!-- Mat input component End-->

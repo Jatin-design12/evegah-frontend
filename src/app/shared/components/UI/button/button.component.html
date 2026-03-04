@@ -1,0 +1,5 @@
+<button mat-button type="button" [class]="class" (click)="onClickButton($event)" [disabled]="disableValue">
+    <mat-icon *ngIf="showLoader" class="loaderIcon">sync</mat-icon>
+    <mat-icon *ngIf="showIcon">{{iconName}}</mat-icon>
+    {{label}}
+</button>

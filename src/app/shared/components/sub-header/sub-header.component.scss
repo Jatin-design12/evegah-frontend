@@ -1,0 +1,89 @@
+.app-page-title {
+  // background: rgb(255 255 255 / 81%);
+  // padding: 1rem 1.5rem;
+  // position: relative;
+  // box-shadow: 0 0px 0px rgb(0 0 0 / 2%), 0 0px 1px rgb(0 0 0 / 18%);
+  .page-title-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 5px 20px 6px 10px;
+    background-color: #7000de;
+  }
+  .page-title-heading {
+    display: flex;
+    align-items: center;
+  }
+  .page-title-actions {
+    margin-left: auto;
+  }
+
+  .button_cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 150px;
+    height: 35px;
+    filter: drop-shadow(0px 4px 3px rgba(12, 12, 12, 0.12));
+    .material-icons {
+      font-size: 20px !important;
+      margin-right: 8px;
+    }
+  }
+  .page-title-icon {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    color: #25282b;
+    height: 40px;
+    width: 40px;
+    justify-content: center;
+    border-radius: var(--btn-radius);
+    margin-right: 5px;
+    :hover {
+      transition: all ease-in-out 0.2s;
+      color: var(--primary-color);
+      cursor: pointer;
+    }
+  }
+  .material-icons {
+    height: unset;
+    width: unset;
+    cursor: pointer;
+  }
+  .main-head {
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 0.5px;
+    margin-bottom: 0px;
+    font-style: bold;
+  }
+}
+
+.wallet,
+.Credit {
+  color: #fff;
+  font-size: 15px;
+  margin: 2px 0px;
+}
+// .Credit{
+
+// }
+// button styles
+.btn-primary {
+  background-color: #fff;
+  color: #000 !important;
+  padding: 10px 15px;
+  font-size: 13px;
+  border: 0px;
+  border-radius: var(--btn-radius);
+}
+.btn-primary:focus {
+  box-shadow: unset;
+}
+.edit-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+}

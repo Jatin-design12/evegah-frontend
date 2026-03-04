@@ -1,0 +1,21 @@
+<!-- Multi Input Component Start-->
+<form [formGroup]="multiInputForm">
+    <mat-form-field appearance="outline" class="multiInput">
+        <mat-label>  {{label}}</mat-label>
+        <input matInput [type]="type" formControlName="input" placeholder="{{label}}" />
+        <mat-select multiple="{{config.multiple}}" formControlName="dropdown" placeholder="{{config.label}}">
+            <mat-option *ngFor="let item of items " [value]="item[config.key]">
+                {{item[config.displayKey]}}
+                <!-- {{config | json}} -->
+            </mat-option>
+        </mat-select>
+        <mat-hint>
+            <span *ngIf="input.invalid && (input.dirty || input.touched)"><span class="error" *ngIf="input.errors?.required">{{label}} is required </span></span>
+            <span  *ngIf="dropdown.invalid && (dropdown.dirty || dropdown.touched)"><span class="error" *ngIf="dropdown.errors?.required">{{config.label}} is required</span></span>
+        </mat-hint>
+       <!--  <mat-hint *ngIf="dropdown.invalid && (dropdown.dirty || dropdown.touched)">
+            <span class="error" *ngIf="dropdown.errors?.required">{{label}} dropdown is required</span>
+        </mat-hint> -->
+    </mat-form-field>
+</form>
+<!-- Multi Input Component End-->

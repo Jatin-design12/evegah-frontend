@@ -1,0 +1,15 @@
+<!--  App Sub Header Start-->
+<app-sub-header [heading]="'Vehicle Model List'" [icon]="'motorcycle'" [buttonLabel]="'Add New Model'" [showButton]="'true'"
+    (onClick)="navigateToMaster($event)"></app-sub-header>
+<!--  App Sub Header Start--> 
+<!-- vehicle List Main body Start -->
+<section class="main-body singleTable">
+    <mat-card class="mainCard card_set p-0">
+        <mat-card-content class="card-body">
+            <app-table [cols]="cols" [data]="rowData"
+            (onAction)="onActionHandler($event)"
+            ></app-table> 
+        </mat-card-content>
+    </mat-card>
+</section>
+<!-- vehicle List Main body End -->

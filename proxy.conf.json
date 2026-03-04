@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://admin.evegah.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

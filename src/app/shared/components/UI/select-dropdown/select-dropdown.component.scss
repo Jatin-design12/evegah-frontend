@@ -1,0 +1,19 @@
+.searchInput {
+    width: calc(100% - 32px);
+    height: 36px !important;
+    padding: 0 12px;
+    margin: 4px;
+    box-shadow: 0 0 0 0.25rem var(--primary-color);
+    // &:focus {
+    // }
+  }
+  mat-form-field {
+    position: relative;
+  }
+  mat-label {
+    font-size: 13px;
+    font-weight: 300;
+}
+input {
+    font-size: 14px;
+}

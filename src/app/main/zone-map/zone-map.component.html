@@ -1,0 +1,80 @@
+<!--  App Sub Header Start-->
+<!-- <app-sub-header [heading]="'Ride live tracking'" [icon]="'map'"></app-sub-header> -->
+<!--  App Sub Header End-->
+
+<!-- User Transaction List Main body End -->
+<!-- <section>
+    <div class="card form-card">
+        <form [formGroup]="mapFilterForm"> 
+                <div class="row">
+                    <div class="col-md-3 mb-4">
+                        <app-select-dropdown [config]="typeDropdown" formControlName="val2">
+                        </app-select-dropdown>
+                    </div> 
+                    <div class="col-md-3 mb-4">
+                        <app-select-dropdown [config]="stateDropdown" formControlName="val2">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <app-select-dropdown [config]="cityDropdown" formControlName="val2">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <app-select-dropdown [config]="areaTypeDropdown" formControlName="val2">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-md-3">
+                        <app-select-dropdown [config]="zoneDropdown" formControlName="val2">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-md-3">
+                        <app-select-dropdown [config]="bikeIdDropdown" formControlName="val2">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <app-button [label]="'Select'" [class]="'btn btn-primary'">
+                        </app-button>
+                    </div>
+                </div> 
+        </form>
+    </div>
+</section> -->
+<section class="main-body live-map-page">
+    <div class="live-map-header">
+        <h3>Live Map</h3>
+        <p>Real-time fleet location and status monitoring</p>
+    </div>
+    <mat-card class="map live-map-card">
+        <!-- <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="16">
+            <agm-direction [origin]="dir.origin" [destination]="dir.destination"></agm-direction>
+        
+            <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="false"
+              (dragEnd)="markerDragEnd($event)" [iconUrl]="myLocationIconUrl" [visible]="isMarkersVisible">
+        
+              <agm-info-window [disableAutoPan]="false" #infoWindow>
+                <div>
+                  "Your Current Location "
+                </div>
+              </agm-info-window>
+            </agm-marker>
+        
+            <agm-marker [visible]="isMarkersVisible" *ngFor="let  zone  of  eveghaZoneMarkers let i = index"
+              [latitude]="zone.latitude" [longitude]="zone.longitude" [animation]="'BOUNCE'" [iconHeight]="10" [iconWidth]="10"
+              (markerClick)="clickedMarker(zone, i)" [iconUrl]="evegahZoneIconUrl">
+        
+              <agm-info-window [disableAutoPan]="false" #infoWindow>
+                <strong> zone : </strong> {{zone.name}}<br>
+                <strong> latitude : </strong> {{zone.latitude}}
+                <strong> longitude : </strong> {{zone.longitude}}
+                <strong> zoneAddress :</strong> {{zone.zoneAddress}}
+              </agm-info-window>
+        
+        
+            </agm-marker>
+        
+          </agm-map> -->
+          <app-draw-map (nameEmitter)="receivename($event)" (zoneDetail)="zoneIdByDetail($event)" [addressData]="addressDetail"  [AllBikeData]="bikeData"></app-draw-map>
+    </mat-card> 
+</section>
+<!-- User Transaction List Main body End -->
+<!-- [AllBikeData]="bikeData" [zoneData]="showAllMap" -->

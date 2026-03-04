@@ -1,0 +1,17 @@
+mat-select::after{
+    content: "";
+    position: absolute;
+    right: calc(40% - 0px);
+    height: 30px;
+    width: 1px;
+    background-color: #c1c1c1;
+    top: 50%;
+    transform: translateY(-50%);
+}
+mat-label {
+    font-size: 13px;
+    font-weight: 300;
+}
+input {
+    font-size: 14px;
+}

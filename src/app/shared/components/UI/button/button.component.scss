@@ -1,0 +1,36 @@
+// Button style
+    .btn {
+        padding: 0px 15px;
+        font-size: 14px;
+        min-width: 130px;
+        height: 38px;
+        border-radius: var(--btn-radius);
+        border: 0px;
+        .material-icons {
+            font-size: 2rem !important;
+            margin-right: .3rem;
+        }
+    }
+
+.btn:hover{
+    transition: all ease-in-out 0.3s;
+}
+.btn:focus{
+    outline: unset;
+    box-shadow: unset;
+}
+
+.secondary {
+    background-color: var(--secondary-color);
+    color: #000;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    background-image: var(--gradient-color);
+    color: #fff;
+    filter: drop-shadow(-0.464px 2px 3px rgba(12, 12, 12, 0.12));
+}
+.btn-primary:hover{
+    background-image: var(--gradient-color-hover);
+}

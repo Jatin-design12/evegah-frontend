@@ -1,0 +1,114 @@
+<!--App Sub Header Start -->
+<app-sub-header [heading]="heading" [icon]="'arrow_back'" (onBackIcon)="backButton()"></app-sub-header>
+<!--App Sub Header End -->
+<!-- Add Category Main body Start -->
+<section class="main-body">
+    <!-- <app-draw-area></app-draw-area> -->
+    <mat-card class="mainCard zone-card-masrer p-0">
+        <mat-card-content class="card-body p-4 pb-0">
+            <div class="row">
+                <div class="col-md-12 map-right-Border">
+                  <p class="note">*You can add city from map and below controls, *if map is not visible , Please allow the location in browser .</p>
+
+                    <div class="container mapContainer">
+                        <input type="text" class="my-search-box" (keydown.enter)="$event.preventDefault()"
+                            placeholder="Search City" type="text" #search />
+                        <div id="map" #map></div>
+                        <ng-container *ngIf="!viewMode"> 
+                            <button  class="btn btn-danger getAddressDelete " #delete (click)="deleteArea()">
+                                Delete Selected Area </button>
+                        </ng-container>
+                    </div>
+
+                </div>
+                <div class="col-md-12 mt-4  ">
+                    <!-- <div class="btns"> -->
+                        <!-- <div class="btn-div">
+                            <button *ngIf="!this.viewMode" class="btn btn-primary getAddress " (click)="getAddress()" >Get City
+                                </button>
+                                <label class="note ">
+                                    *Click the Get City button for Set Selected City Name & State in Field
+                                </label>
+                          </div> -->
+                        
+                        <!-- <button *ngIf="editMode || isAreaDelete" class="btn btn-danger  getAddress" (click)="delete()">
+                            Delete Created Area </button>  -->
+                            <!-- <ng-container *ngIf="!viewMode"> 
+                                <button  class="btn btn-danger getAddress " #delete (click)="deleteArea()">
+                                    Delete Selected Area </button>
+                            </ng-container> -->
+                    <!-- </div> -->
+                           
+                    <form [formGroup]="cityMasterForm" class=" mt-3  px-2">
+
+                        <div class="row">
+
+                            <div class="col-md-8">
+                               <div class="row">
+                                <div class="col-md-6">
+                                    <div class="btn-inputSet d-flex">
+                                        <button *ngIf="!this.viewMode" class="btn btn-primary getAddresss " (click)="getAddress()" >Get City
+                                        </button>
+                                        <app-input [label]="'Map City Name'" formControlName="city" [readonly]="'true'"></app-input>
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-md-6">
+                                    <app-input [label]="'State Name'" formControlName="state"
+                                        [readonly]="'true'"></app-input>
+                                </div>
+                                
+                                <label class="note ">
+                                    *Click the Get City button for Set Selected City Name & State in Field
+                                </label>
+                               </div>
+                                
+
+                            </div>
+                            
+
+                            <div class="col-md-4">
+                                <app-input [label]="'Enter City Name'" [type]="'text'"
+                                    formControlName="name"></app-input>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <mat-card-actions class="card-action p-2" *ngIf="!viewMode">
+                                    <app-button [label]="'Cancel'" [class]="'btn secondary ml-auto'" (click)="cancel()">
+                                    </app-button>
+                                    <app-button [label]="'Save'" [class]="'btn btn-primary'" (click)="saveArea()"
+                                    [disabled]="cityMasterForm.invalid" ></app-button>
+                                       <!--  -->
+                                </mat-card-actions>
+                            </div>
+
+
+                        </div>
+
+
+                    </form>
+                </div>
+
+                <!-- <mat-card-actions class="p-2" *ngIf="!viewMode">
+                    <app-button [label]="'Cancel'" [class]="'btn secondary ml-auto'" (click)="cancel()">
+                    </app-button>
+                    <app-button [label]="'Save'" [class]="'btn btn-primary'" (click)="saveArea()"
+                        [disabled]="cityMasterForm.invalid"></app-button>
+                </mat-card-actions> -->
+
+
+            </div>
+            <span #infowindowContent>
+                <span #placeName class="title"></span><br />
+                <strong></strong> <span #placeId></span><br />
+                <span #placeAddress></span>
+            </span>
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=drawing&v=weekly"
+                defer></script>
+        </mat-card-content>
+
+    </mat-card>
+
+</section>
+<!-- Add Category Main body End -->

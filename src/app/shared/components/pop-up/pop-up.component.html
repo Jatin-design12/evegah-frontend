@@ -1,0 +1,45 @@
+<section class="text-center" *ngIf="qr">
+    <!-- <h3>QR CODE</h3> -->
+    
+    
+    <!-- <div class="text-center mt-5">
+        <button class="close-btn" (click)="closemodel()">close</button>
+    </div> -->
+    <mat-dialog-header>
+        <h4 class="mb-0">QR Code</h4>
+        <button type="button" class="btn-close" (click)="closemodel()"></button>
+    </mat-dialog-header>
+    <mat-dialog-content class="text-center"> 
+        <img [src]="QRcode"/>
+        <h4 class="mt-1 mb-0">{{data.lockNumber}}</h4>
+    </mat-dialog-content>
+</section>
+
+
+<section *ngIf="endRide"> 
+    <mat-dialog-header>
+        <h4 class="mb-0">Ride End</h4>
+        <button type="button" class="btn-close" (click)="closemodel()"></button>
+    </mat-dialog-header>
+    <mat-dialog-content>
+        <h5>will you want to end this ride ?</h5>
+        <input [label]="'enter Remark'" [type]="'text'" class="form-control" [(ngModel)]="remark"  #name="ngModel" required>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)"
+    class="alert alert-danger">
+
+                <!-- <div *ngIf="name.errors?.['required']"> -->
+                   Remark is required.
+                <!-- </div> -->
+  </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="text-right">
+        <button type="button" class="btn savebtn"  [disabled]="!remark"(click)="endRideBike()">End Ride</button>
+    </mat-dialog-actions> 
+</section>
+
+<!-- <section class="text-center" *ngIf="lock">
+    <button mat-button (click)="setInstruction(zone,'lock')"
+    *ngIf="zone.deviceLockAndUnlockStatus == 1">Lock</button>
+    <button mat-button (click)="setInstruction(zone,'unlock')"
+    *ngIf="zone.deviceLockAndUnlockStatus == 2">Unlock</button>
+</section> -->

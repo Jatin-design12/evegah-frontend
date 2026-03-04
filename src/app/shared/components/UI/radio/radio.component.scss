@@ -1,0 +1,32 @@
+.full-width {
+    flex: 1;
+    display: flex;
+    margin: 5px;
+}
+
+.radio-container {
+    position: relative;
+}
+
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -3px -4px -5px -4px;
+    flex-direction: column;
+}
+
+.radio-button {
+    padding: 3px 4px 3px 4px;
+}
+
+.wrap-label-text {
+    white-space: normal;
+}
+
+.mat-radio-button~.mat-radio-button {
+    margin-left: 16px;
+}
+
+mat-label {
+    display: block !important;
+}

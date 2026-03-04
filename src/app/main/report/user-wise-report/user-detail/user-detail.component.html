@@ -1,0 +1,23 @@
+<section>
+    <header class="model-header">
+
+        <div class="header-text">
+            <h4 class="mb-0">User Wise Earning Report
+                <span>
+                    <p> ( Date Range : From {{data.fromDatefull |date: 'dd-MM-yyyy'}}  To {{data.toDatefull | date:
+                        'dd-MM-yyyy'}} )</p>
+
+                </span>
+            </h4>
+            <p> Name : {{data.userName}}</p>
+            <p> Mobile No. : {{data.mobileNo}}</p>
+        </div>
+        <button type="button" class="btn-close" (click)="closemodel()"></button>
+    </header>
+
+    <mat-card class="mainCard card_set p-0">
+        <mat-card-content class="card-body p-0">
+            <app-table [cols]="cols" [data]="tableData" [excelName]="'User Wise Earning Report'"></app-table>
+        </mat-card-content>
+    </mat-card>
+</section>

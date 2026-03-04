@@ -1,0 +1,329 @@
+<!--App Sub Header Start -->
+<app-sub-header [heading]="heading" [icon]="'arrow_back'" (onBackIcon)="backButton()"></app-sub-header>
+<!--App Sub Header End -->
+
+<!-- Add Category Main body Start -->
+<section class="main-body">
+    <form [formGroup]="vehicleForm">
+        <mat-card class="mainCard">
+            <mat-card-content class="card-body">
+                <div class="notes">
+                    <h6>Important note:</h6>
+                    <ol>
+                        <li>Maximum of 3 Image can be uploaded</li>
+                        <li>Image Should Be Less Than 500kb</li>
+                        <li>Upload images with aspect ratio of 16:9</li>
+                    </ol>
+                </div>
+                <div class="mb-3">
+                    <!-- Start of Image and button section -->
+                    <div class="row">
+
+                        <label class="alert alert-warning"> For Mobile Slider In App </label>
+
+                        <!-- Start of Button Section -->
+                        <div class="col-sm-4 text-center">
+                            <div class="border">
+                                <figure class="uploadedImg" *ngIf="image1">
+                                    <mat-icon (click)="removeImage(image1DataJson,1,forMobileImage)"
+                                        class="closeIcon">close</mat-icon>
+                                    <img class="cycle-img img-fluid" [src]=image1 />
+
+                                </figure>
+                                <figure class="uploadedImg  placeholderImage p-4" *ngIf="!image1 ">
+                                    <img class="cycle-img img-fluid" src="../../../../../assets/images/upload.png" />
+                                </figure>
+                                <!-- <div class="loading" *ngIf = "uploadProgress < 100">
+                                    <mat-progress-spinner
+                                    diameter="70"
+                                    [value]="uploadProgress"
+                                    mode="determinate">Loading..
+                                    </mat-progress-spinner>
+                                </div>  -->
+
+                                <app-file-upload *ngIf = "image1" [label]="'Change image'" [class]="class"
+                                    (change)="fileChange($event,1, forMobileImage)" formControlName="choseImage">
+                                </app-file-upload>
+                                <app-file-upload   *ngIf = "!image1" [label]="'Upload image'" [class]="class"
+                                (change)="fileChange($event,1,forMobileImage)" formControlName="choseImage" [multiple]="'false'">
+                            </app-file-upload>
+                                <!-- <label class="inputlabel"[class]="class" *ngIf = "image1"> Change image
+                                <input type="file"  (change)="fileChange($event,1,forMobileImage)" formControlName="choseImage" > 
+                            </label> -->
+                                <!-- <label class="inputlabel" [class]="class">
+                                    {{image1 ? 'Change' : 'Upload' }} Image
+                                    <input type="file" (change)="fileChange($event,1,forMobileImage)"
+                                        formControlName="choseImage" accept="image/jpeg, image/png">
+                                </label> -->
+
+                            </div>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <div class="border">
+                                <figure class="uploadedImg" *ngIf="image2">
+                                    <mat-icon (click)="removeImage(image2DataJson,2,forMobileImage)"
+                                        class="closeIcon">close</mat-icon>
+                                    <img class="cycle-img img-fluid" [src]=image2 />
+                                </figure>
+                                <figure class="uploadedImg  p-4" *ngIf="!image2">
+                                    <img class="cycle-img img-fluid" src="../../../../../assets/images/upload.png" />
+                                </figure>
+                                <app-file-upload *ngIf = "image2" [label]="'Change image'" [class]="class"
+                                    (change)="fileChange($event,2,forMobileImage)" formControlName="choseImage">
+                                </app-file-upload>
+                               
+                                <app-file-upload  *ngIf = "!image2" [label]="'Upload image'" [class]="class"
+                                (change)="fileChange($event,2,forMobileImage)" formControlName="choseImage">
+                            </app-file-upload>
+                                <!-- <label class="inputlabel" [class]="class">
+                                    {{image2 ? 'Change' : 'Upload' }} Image
+                                    <input type="file" (change)="fileChange($event,2,forMobileImage)"
+                                        formControlName="choseImage" accept="image/jpeg, image/png">
+                                </label> -->
+                            </div>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <div class="border">
+                                <figure class="uploadedImg" *ngIf="image3">
+                                    <mat-icon (click)="removeImage(image3DataJson,3,forMobileImage)"
+                                        class="closeIcon">close</mat-icon>
+                                    <img class="cycle-img img-fluid" [src]=image3 />
+                                </figure>
+                                <figure class="uploadedImg p-4" *ngIf="!image3">
+                                    <img class="cycle-img img-fluid" src="../../../../../assets/images/upload.png" />
+                                </figure>
+                                <app-file-upload  *ngIf = "image3" [label]="'Change image'" [class]="class"
+                                    (change)="fileChange($event,3,forMobileImage)" formControlName="choseImage">
+                                </app-file-upload>
+                               
+                                <app-file-upload *ngIf = "!image3" [label]="'Upload image'"  [class]="class"
+                                (change)="fileChange($event,3,forMobileImage)" formControlName="choseImage">
+                            </app-file-upload>
+                                <!-- <label class="inputlabel" [class]="class">
+                                    {{image3 ? 'Change' : 'Upload' }} Image
+                                    <input type="file" (change)="fileChange($event,3,forMobileImage)"
+                                        formControlName="choseImage" accept="image/jpeg, image/png">
+                                </label> -->
+                            </div>
+                        </div>
+                    </div> <!-- Start of Button Section -->
+
+                </div> <!-- End of Image and button section -->
+
+                <div class="row">
+                    <div class="row mb-3">
+                        <label class="alert alert-warning"> For Admin Attachment </label>
+                        <div class="col-sm-4 text-center">
+                            <div class="border">
+                                <figure class="uploadedImgfile" *ngIf="image1Admin">
+                                    <mat-icon (click)="removeImage(image1DataAdminJson,4,forAdminImage)"
+                                        class="closeIcon">close</mat-icon>
+                                    <!-- <img  class="cycle-img img-fluid" [src]=image1Admin  alt="imag"> -->
+                                    <!-- <img    class="cycle-img img-fluid" src="../../../../../assets/images/upload.png" /> -->
+                                    <a [href]="image1Admin">
+                                        <p> {{this.image1DataAdminJson.image_name}} </p>
+                                        <span><mat-icon>download</mat-icon> download </span>
+                                    </a>
+                                </figure>
+                                <!-- <figure class="uploadedImg p-4" *ngIf = "!image1Admin">
+                                    <img    class="cycle-img img-fluid" src="../../../../../assets/images/upload.png" />
+                                 </figure>  -->
+                                <app-file-upload *ngIf = "image1Admin" [label]="'Change file'" [class]="class" [fileType]="'file'"
+                                    (change)="fileChange($event,4, forAdminImage)" formControlName="choseImageAdmin">
+                                </app-file-upload>
+                                <app-file-upload   *ngIf = "!image1Admin" [label]="'Upload file'" [class]="class" [fileType]="'file'"
+                                (change)="fileChange($event,4, forAdminImage)" formControlName="choseImageAdmin">
+                            </app-file-upload>
+                                <!-- <label class="inputlabel" [class]="class">
+                                            {{image1Admin ? 'Change' : 'Upload' }} Attachment
+                                    <input type="file" (change)="fileChange($event,4,forAdminImage)"
+                                        formControlName="choseImage">
+                                </label> -->
+                            </div>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <div class="border">
+                                <figure class="uploadedImgfile" *ngIf="image2Admin">
+                                    <mat-icon (click)="removeImage(image2DataAdminJson,5, forAdminImage )"
+                                        class="closeIcon">close</mat-icon>
+                                    <!-- <img   class="cycle-img img-fluid" [src]=image2Admin/> -->
+                                    <a [href]="image2Admin">
+                                        <p> {{this.image2DataAdminJson.image_name}} </p>
+                                        <span><mat-icon>download</mat-icon> download </span>
+                                    </a>
+                                </figure>
+
+                                <!-- <figure class="uploadedImg  p-4" *ngIf = "!image2Admin">
+                                    <img    class="cycle-img img-fluid" src="../../../../../assets/images/upload.png" />
+                                 </figure>  -->
+                                <app-file-upload *ngIf = "image2Admin" [label]="'Change file'" [class]="class" [fileType]="'file'"
+                                    (change)="fileChange($event,5, forAdminImage)" formControlName="choseImageAdmin">
+                                </app-file-upload>
+                               
+                                <app-file-upload  *ngIf = "!image2Admin" [label]="'Upload file'" [class]="class" [fileType]="'file'"
+                                (change)="fileChange($event,5, forAdminImage)" formControlName="choseImageAdmin">
+                            </app-file-upload>
+                                <!-- <label class="inputlabel" [class]="class">
+                                    {{image2Admin ? 'Change' : 'Upload' }} Attachment
+                                    <input type="file" (change)="fileChange($event,5,forAdminImage)"
+                                        formControlName="choseImage">
+                                </label> -->
+                            </div>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <div class="border">
+                                <figure class="uploadedImgfile" *ngIf="image3Admin">
+                                    <mat-icon (click)="removeImage(image3DataAdminJson,6,forAdminImage)"
+                                        class="closeIcon">close</mat-icon>
+                                    <!-- <img class="cycle-img img-fluid" [src]=image3Admin /> -->
+                                    <a [href]="image3Admin">
+                                        <p> {{this.image3DataAdminJson.image_name}} </p>
+                                        <span><mat-icon>download</mat-icon> download </span>
+                                    </a>
+                                    <!-- </a> -->
+
+                                </figure>
+                                <!-- <figure class="uploadedImg p-4" *ngIf = "!image3Admin">
+                                    <img    class="cycle-img img-fluid" src="../../../../../assets/images/upload.png" />
+                                 </figure>  -->
+                                <app-file-upload  *ngIf = "image3Admin" [label]="'Change file'" [class]="class" [fileType]="'file'"
+                                    (change)="fileChange($event,6,  forAdminImage)" formControlName="choseImageAdmin">
+                                </app-file-upload>
+                               
+                                <app-file-upload *ngIf = "!image3Admin" [label]="'Upload file'"  [class]="class" [fileType]="'file'"
+                                (change)="fileChange($event,6,  forAdminImage)" formControlName="choseImageAdmin">
+                            </app-file-upload>
+
+                                <!-- <label class="inputlabel" [class]="class">
+                                    {{image3Admin ? 'Change' : 'Upload' }} Attachment
+                                    <input type="file" (change)="fileChange($event,6,forAdminImage)"
+                                        formControlName="choseImage">
+                                </label> -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-4">
+                        <app-input [label]="'Enter Frame type'" [type]="'text'" formControlName="frameType">
+                        </app-input>
+                    </div> -->
+
+                    <!-- <div class="col-sm-4">
+                        <app-input [label]="'Enter Minumum Hire Time'" [type]="'text'" formControlName="minHireTime">
+                        </app-input>
+                        <span>*Minimum time should be 10 min or above 10 min</span>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-input [label]="'Enter Minimum Rate '" [type]="'text'" formControlName="minimumRentRate">
+                        </app-input>
+                        <span>*Minimum Rate should be 5 INR, or more than that </span>
+                    </div> -->
+
+                    <!-- ------------------New parameter -->
+                    <div class="col-sm-4">
+                        <app-select-dropdown [config]="vehicleTypeDropdown" formControlName="vehicleType"
+                            [items]="vehicleTypeData">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-select-dropdown [config]="batteryTypeDropdown" formControlName="batteryType"
+                            [items]="batteryTypeData" (selectionChange)="selectAllBattery($event,batteryTypeData)"
+                            [selectAllCheck]="batteryCheck">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-input [label]="'Enter Company name'" [type]="'text'" formControlName="brandName" (keyup)="InputCompanyName($event)">
+                        </app-input>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="companyModel d-flex">
+                            <input *ngIf="companyName !==''" class="companyName" [value]="companyName" type='text'  readonly />
+                            <app-input [label]="'Enter Model Name'" [type]="'text'" formControlName="modelName" (keyup)="checkCompanyName($event)" >
+                            </app-input>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-input [label]="'Enter Motor Type'" [type]="'text'" formControlName="motorType">
+                        </app-input>
+                    </div>
+
+
+
+                    <div class="col-sm-4">
+                        <app-select-dropdown [config]="frameTypeDropdown" formControlName="frameType"
+                            [items]="frameTypeData">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-select-dropdown [config]="brakeTypeDropdown" formControlName="brakeType"
+                            [items]="brakeTypeData" (selectionChange)="checkBrake($event)"
+                            [selectAllCheck]="selectAllBrake">
+                        </app-select-dropdown>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <app-input [label]="'Battery Capacity Volt'" [type]="'number'"
+                            formControlName="batteryCapacityVolt">
+                        </app-input>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-input [label]="'Battery Capacity Ah'" [type]="'number'"
+                            formControlName="batteryCapacityAh">
+                        </app-input>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-select-dropdown [config]="AccessoriesDropdown" formControlName="accessories"
+                            [items]="accessoriesData" (selectionChange)="selectAllAccessories($event,accessoriesData)"
+                            [selectAllCheck]="accessoriesCheck">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-input [label]="'Enter Color '" [type]="'text'" formControlName="color">
+                        </app-input>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-input [label]="'Maximum range on 100% Battery charge(KM)'" [type]="'number'"
+                            formControlName="maxRangeOn100PercentageBatteryKM">
+                        </app-input>
+                    </div>
+
+                    <!-- <div class="col-sm-4">
+                        <app-input [label]="'Enter Tires Size'" [type]="'text'" formControlName="tiersSize">
+                        </app-input>
+                    </div>
+                    
+                    <div class="col-sm-4">
+                        <app-multi-input [ControlName]="'lenth'" [required]="true" formControlName="length"
+                            [label]="'Length'" [items]="lengthUnitData" [type]="'number'" [config]="multiDropdown">
+                        </app-multi-input>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-multi-input [ControlName]="'width'" [required]="true" formControlName="width"
+                            [label]="'Width'" [items]="lengthUnitData" [type]="'number'" [config]="multiDropdown">
+                        </app-multi-input>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-multi-input [ControlName]="'weight'" [required]="true" formControlName="weight"
+                            [label]="'Weight'" [items]="lengthUnitData" [type]="'number'" [config]="multiDropdown">
+                        </app-multi-input>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-multi-input [ControlName]="'height'" [required]="true" formControlName="height"
+                            [label]="'Height'" [items]="lengthUnitData" [type]="'number'" [config]="multiDropdown">
+                        </app-multi-input>
+                    </div> -->
+
+
+
+                </div>
+            </mat-card-content>
+            <mat-card-footer>
+                <app-button [label]="'Cancel'" [class]="'btn secondary'" class="cancelBtn">
+                </app-button>
+                <app-button [label]="btnLabel" [class]="'btn btn-primary'" (click)="addUpdateVehicleModelDetails()">
+                </app-button>
+            </mat-card-footer>
+        </mat-card>
+    </form>
+</section>
+<!-- Add Category Main body End -->
+<!-- [disabled]="vehicleForm.invalid" -->

@@ -1,0 +1,17 @@
+<!--  App Sub Header Start-->
+<app-sub-header [heading]="'Zone List'" [icon]="'location_on'" [buttonLabel]="'Add Zone '" [showButton]="'true'"
+    (onClick)="navigateToMaster($event)"></app-sub-header>
+
+<!--  App Sub Header Start-->
+
+<!-- Zone List Main body Start -->
+<section class="main-body singleTable">
+    <mat-card class="mainCard card_set p-0">
+        <mat-card-content class="card-body">
+            <app-table [cols]="cols" [data]="rowData" 
+            [excelName]="'Zone'" 
+            (onAction)="onActionHandler($event)"></app-table> 
+        </mat-card-content>
+    </mat-card>
+</section>
+<!-- Zone List Main body End -->

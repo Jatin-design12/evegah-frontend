@@ -1,0 +1,48 @@
+<mat-dialog-header>
+    <h4 class="mb-0">Vehicle{{data.bikeData.action}} Modal</h4>
+    <button type="button" class="btn-close" (click)="closemodel()"></button>
+</mat-dialog-header>
+<mat-dialog-content>
+    <p>IOT Device Id : <span> {{data.bikeData.data.lockNumber}}</span></p>
+
+    <p>Vehicle   Status : <span>{{data.bikeData.data.device_lock_unlock_status
+    }}</span></p>
+
+    <p>IOT Device Status : <span>{{ data.bikeData.data.deveiceStatus}}</span></p> 
+
+    
+    
+    Remark:
+    <textarea  id="name" name="name"  class="form-control"[label]="'enter Remark'" [type]="'text'" [(ngModel)]="remark" #name="ngModel" required ></textarea>
+    <div *ngIf="name.invalid && (name.dirty || name.touched)"
+    class="alert alert-danger">
+
+                <!-- <div *ngIf="name.errors?.['required']"> -->
+                   Remark is required.
+                <!-- </div> -->
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="text-right">
+    <button type="button" class="btn savebtn" (click)="save(data.bikeData.action)" [disabled]="!remark">Done</button>
+</mat-dialog-actions> 
+
+<!-- <mat-card>
+    <mat-card-content>
+        <p>Bike Status : <span>{{data.bikeData.data.device_lock_unlock_status
+        }}</span></p>
+        
+        <p>Device Status : <span>{{ data.bikeData.data.deveiceStatus}}</span></p> 
+        
+        <p>Device Id : <span> {{data.bikeData.data.lockNumber}}</span></p>
+        
+        Remark : 
+       <input type="text" class="input" mpInput [(ngModel)]="remark">
+      
+
+    </mat-card-content>
+    <mat-card-actions>
+        <button class="btn btn-primary " (click)="save(data.bikeData.action)">Done</button>
+
+    </mat-card-actions>
+</mat-card> -->
+

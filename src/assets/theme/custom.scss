@@ -1,0 +1,40 @@
+.active {
+    font-weight: bold;
+    background-color: yellow;
+    text-decoration: none;
+  }
+
+  mat-sidenav {
+    background: #fff !important;
+    color: #fff !important;
+    // box-shadow: 0px 0px 5px -1px #7a7282;
+    // border-right:1px solid #d6adff !important;
+}
+.main-body {
+    padding: 0 !important;
+}
+
+
+app-header {
+    display: block;
+    border-bottom: 1px solid #e9ecef;
+    box-shadow: 0px 0px 3px 1px #e9ecef;
+}
+
+.footer-sidebar{
+    box-shadow: 0px 0px 2px -1px #00d100;
+
+}
+
+
+
+.mat-list-item-content {
+    position: relative;
+    mat-icon.show {
+        position: absolute;
+        right: 0;
+        color: #00000078;
+        font-size: 2em;
+        top: 12px;
+    }
+}

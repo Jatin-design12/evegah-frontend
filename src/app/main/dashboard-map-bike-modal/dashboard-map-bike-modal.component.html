@@ -1,0 +1,32 @@
+<section class="text-center" class="mapModel">
+    <mat-dialog-header>
+        <h4 class="mb-0">{{data.bikeStatusName}} - {{data.lockNumber}}</h4>
+        <button type="button" class="btn-close" (click)="closemodel()"></button>
+    </mat-dialog-header>
+    <mat-dialog-content class="text-center">
+        <mat-card>
+            <app-table [cols]="cols" [data]="tableData" [excelName]="'table'"></app-table>
+        </mat-card>
+
+        <mat-card *ngIf="isShow" class="mt-3">
+            <button class="btn btn-primary" (click)="UserCurrentWallet()">User Current Wallet</button>
+            <app-table  [cols]="UserCurrentcols" [data]="UserCurrenttableData" [excelName]="'table'"></app-table>
+        </mat-card>
+
+        <mat-card *ngIf="isShow" class="mt-3">
+            <button class="btn btn-primary" (click)="last10RidebyUser()">Last 10 ride booking by user</button>
+            <app-table [cols]="RidebyUsercols" [data]="RidebyUsertableData" [excelName]="'table'"></app-table>
+        </mat-card>
+
+        <mat-card class="mt-3">
+            <button class="btn btn-primary" (click)="last10RidebyLock()">Last 10 ride booking by IOT Device </button>
+            <app-table [cols]="RidebyLockcols" [data]="RidebyLocktableData" [excelName]="'table'"></app-table>
+        </mat-card>
+
+       
+        <mat-card *ngIf="isShow" class="mt-3">
+            <button class="btn btn-primary" (click)="last10Transactions()">Last 10 Transactions</button>
+            <app-table [cols]="last10Transactionscols" [data]="last10TransactionstableData" [excelName]="'table'"></app-table>
+        </mat-card>
+    </mat-dialog-content>
+</section>

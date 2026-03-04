@@ -1,0 +1,18 @@
+<mat-form-field appearance="outline">
+  <mat-label> {{label}} </mat-label>
+  <input matInput readonly  [min]="minDate" [max]="maxDate"   (dateChange)="onDateChange($event.target.value)" (dateChange)="onChange($event.target.value)" [matDatepicker]="picker" [(ngModel)]="selected">
+  <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="disabled"  ></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+  <mat-hint *ngIf="(controlDir && controlDir.control && !controlDir.control.valid
+  && controlDir.control.touched)">
+<span class="error" *ngIf="controlDir.control.errors?.required">{{label}} is required</span>
+<span class="error" *ngIf="(!controlDir.control.errors?.required && controlDir.control.invalid)">{{label}} is
+  Invalid</span>
+  </mat-hint>
+</mat-form-field>
+<!-- <div *ngIf="(controlDir && controlDir.control && !controlDir.control.valid
+&& controlDir.control.touched)">
+  <mat-hint class="error" *ngIf="controlDir.control.errors?.required">{{label}} is required</mat-hint>
+  <mat-hint class="error" *ngIf="(!controlDir.control.errors?.required && controlDir.control.invalid)">{{label}} is
+    Invalid</mat-hint>
+</div> -->

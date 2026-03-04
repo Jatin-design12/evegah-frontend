@@ -1,0 +1,14 @@
+<!--App Sub Header Start -->
+<app-sub-header [heading]="'Fare Plan List'" [icon]="'attach_money'" [buttonLabel]="'Add Fare Plan'" [showButton]="'true'"
+    (onClick)="navigateToMaster($event)"></app-sub-header>
+<!--App Sub Header End -->
+
+<!-- User List Main body Start -->
+<section class="main-body">
+    <mat-card class="mainCard card_set p-0">
+        <mat-card-content class="card-body">  
+            <app-table [cols]="cols"  [excelName]="'Fare Plan List'" [data]="farePlanListData" (onAction)="onActionHandler($event)"></app-table> 
+        </mat-card-content>
+    </mat-card>
+</section>
+<!-- User List Main body End --> 

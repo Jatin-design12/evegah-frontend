@@ -1,0 +1,113 @@
+<!-- © 2021 .Kritin Digital solutions  All rights reserved.
+ Original Author: Jayant Verma
+ Original Date: 21 Sep 2021 -->
+
+<!-- Login Main Section Strat -->
+
+<!-- <video autoplay muted loop plays-inline class="back-video">
+    <source src="../../../assets/images/Underwater - 6061.mp4" type="video/mp4">
+  </video> -->
+<!-- <div class="container-fluid fluid-cls">
+      <div class="row col-class">
+        <div class="col-md-6 col-first">
+          <div class="session_container front">
+            
+            <div class="form-div-sec">
+              <div class="text-center">
+                <figure class="">
+                  <img src="../../../assets/images/eve-logo.svg" alt="logo">
+                </figure>
+                <h3>Welcome to login</h3>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 ps-0">
+          <div class="session_container front">
+            
+            <div class="form-div">
+              
+              <h1 class="heading">LOGIN</h1>
+             
+              <form [formGroup]="loginForm">
+                <div class="row">
+                  <div class="col-sm-12 mb-4"> 
+                    <label class="mb-2" for="fname">Enter Registered Email ID*</label><br>
+                    <input type="text" id="fname" name="fname" formControlName="emailId" placeholder="Enter Email ID">
+                  </div>
+                  <div class="col-sm-12 mt-3 mb-3"> 
+                    <label class="mb-2" for="pwd">Enter Your Password*</label><br>
+                    <input type="password" id="pwd" name="pwd" formControlName="password"
+                      placeholder="Enter Your Password*">
+                  </div>
+                  <div class="col-sm-12 pt-3 text-center"> 
+                    <button type="submit" class="btn-login" (click)="onSubmit()">Submit</button>
+                  </div>
+                  <div class="col-sm-12 mt-3 text-end">
+                    <a class="link" [routerLink]="['/resetPassword']">Reset Password</a>
+                  </div>
+                </div>
+              </form> 
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+<div class="main-section">
+  <video autoplay muted loop plays-inline class="back-video">
+    <source src="../../../assets/images/Plexus - 31503.mp4" type="video/mp4">
+  </video>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card-div">
+        <div>
+          <div>
+            <img *ngIf="isClient" src="../../../assets/images/company-logo.png" alt="Logo">
+            <img *ngIf="!isClient" src="../../../assets/images/company-logo.png" alt="Logo">
+          </div>
+          <h2>Welcome back!</h2>
+          <h6 class="font-weight-semibold mb-4">Please sign in to continue.</h6>
+        </div>
+        <div class="tabset">
+          <!-- Tab 1 -->
+          <input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked>
+          <label for="tab1">Login</label>
+          <!-- Tab 2 -->
+          <!-- <input type="radio" name="tabset" id="tab2" aria-controls="rauchbier">
+          <label for="tab2">Reset</label> -->
+          <div class="tab-panels">
+
+            <div id="marzen" class="tab-panel">
+              <form [formGroup]="loginForm">
+                <label class="mb-2" for="fname">Email</label><br>
+                <input class="form-input" type="text" id="fname" name="fname" formControlName="emailId"
+                  placeholder="Enter Email ID"><br>
+                <label class="mb-2 mt-4" for="pwd">Password</label><br>
+                <input class="form-input" type="password" id="pwd" name="pwd" formControlName="password"
+                  placeholder="Enter Your Password*"><br>
+                <button type="submit" class="btn-login" (click)="onSubmit()">Submit</button>
+              </form>
+            </div>
+            <!-- <div id="rauchbier" class="tab-panel">
+              <form [formGroup]="newResetPasswordForm">
+                <label class="mb-2" for="fname">New Password</label><br>
+                <input class="form-input" placeholder="New Password" type="text" formControlName="newPassword">
+                <label class="mb-2 mt-4" for="fname">Confirm Password</label><br>
+                <input class="form-input" placeholder="Confirm Password" type="text" formControlName="confirmPassword">
+                <button type="submit" class="btn-login" (click)="resetPassword()">
+                  Reset
+                </button>
+               
+              </form>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login Main Section End -->

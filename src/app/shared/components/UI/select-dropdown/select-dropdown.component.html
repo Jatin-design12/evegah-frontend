@@ -1,0 +1,23 @@
+<mat-form-field appearance="outline">
+  <mat-label>{{config.label}}</mat-label>
+  <mat-select   (selectionChange)="onChange($event.value)"   [disabled]="disabled"  (selectionChange)="onSelectionChange($event.value)"required="{{config.required}}" multiple="{{config.multiple}}" [(value)]="selected"  placeholder="{{config.label}}" #select>
+     
+   
+    <input matInput type="text"  class="searchInput form-control" placeholder="Search..."  (keyup)="onSearch($event.target.value)" />
+    <ng-container *ngIf="config.multiple">
+        <mat-checkbox class="mat-option" (change)="selectAll()" [(ngModel)]="allSelect" [ngModelOptions]="{standalone: true}" [checked]="selectAllCheck">
+              {{text}}
+        </mat-checkbox>
+    </ng-container>
+   
+    <mat-option *ngFor="let item of selectedItems " [value]="item[config.key]"   >   
+          {{item[config.displayKey]}}
+     </mat-option>
+  </mat-select>
+  <mat-hint *ngIf="(controlDir && controlDir.control && !controlDir.control.valid
+&& controlDir.control.touched)">
+  <span class="error" *ngIf="controlDir.control.errors?.required">{{config.label}} is required</span>
+  <span class="error" *ngIf="(!controlDir.control.errors?.required && controlDir.control.invalid)">{{label}} is
+    Invalid</span>
+  </mat-hint>
+</mat-form-field> 

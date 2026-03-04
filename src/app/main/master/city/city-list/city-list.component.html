@@ -1,0 +1,13 @@
+<!--  App Sub Header Start-->
+<app-sub-header [heading]="'City List'" [icon]="'location_city'" [buttonLabel]="'Add City'" [showButton]="'true'"
+    (click)="navigateToMaster($event)"></app-sub-header>
+<!--  App Sub Header End-->
+<!-- Content Start -->
+<section class="main-body singleTable">
+    <mat-card class="mainCard card_set p-0">
+        <mat-card-content class="card-body">
+            <app-table [cols]="cols" [data]="cityData"[excelName]="'Area List'" (onRowAction)="onRowActioHandler($event)" (onAction)="onActionHandler($event)"></app-table>
+        </mat-card-content>
+    </mat-card>
+</section>
+<!-- Content End -->

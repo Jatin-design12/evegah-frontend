@@ -1,0 +1,48 @@
+
+.card-body{
+    padding: 0 !important;
+}
+.table > :not(:last-child) > :last-child > * {
+    border-bottom-color: #dbdbdb;
+} 
+th{
+    padding: 1.5rem;
+    font-size: 13px;
+    color: #444;
+    font-weight: lighter;
+}
+td{
+    padding: 1.5rem;
+    color: #6c757d !important;
+    font-size: 12px;
+}
+h5{
+    margin: 0;
+    padding: 2rem;
+    font-weight: 600;
+    padding-left: 15px;
+    border-bottom: 1px solid #efefef;
+    font-size: 16px;
+}
+.action{
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+}
+.city-Name{
+    background-color: darkgoldenrod;
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 6px;
+}
+
+.user-table-shell {
+    transition: opacity 220ms ease, transform 220ms ease;
+    opacity: 1;
+    transform: translateY(0);
+
+    &.is-refreshing {
+        opacity: 0.85;
+        transform: translateY(4px);
+    }
+}

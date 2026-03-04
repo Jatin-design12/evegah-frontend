@@ -1,0 +1,39 @@
+ <!--  App Sub Header Start-->
+ <app-sub-header [heading]="'FAQs Section '" [icon]="'view_headline'" [buttonLabel]="'Reorder Faq Section'" [showButton]="'true'"
+ (onClick)="ReorderFaq('section')"></app-sub-header>
+ <!--  App Sub Header End-->
+ 
+ <!-- List Main body End -->
+ <section class="main-body">
+     <div class="card p-3">
+         <form [formGroup]="faqForm"> 
+                 <div class="row noMarginmatField justify-content-between mt-0 mb-2 align-items-end"> 
+                    <!-- <div class="col-md-3 ">
+                        <app-select-dropdown [config]="sectionDropdown" formControlName="sectionId" [items]="sectionData">
+                        </app-select-dropdown>
+                    </div> -->
+                    <div class="col-md-9 ">
+                        <app-input [type]="'text'" [label]="'Enter Section'" formControlName="section"> </app-input>
+                    </div>
+                    
+                    <!-- <div class="col-md-12 mt-3">
+                        <app-textarea  [label]="'Enter Answer'" [class]="'text-area'" formControlName="answer"> </app-textarea>
+                    </div>
+                    <div class="col-md-3 ">
+                        <app-select-dropdown [config]="StatusDropdown" formControlName="EnumId" [items]="EnumData">
+                        </app-select-dropdown>
+                    </div> -->
+                     <div class="col-md-3 text-end mt-3">
+                         <app-button [label]="buttonLabel" [class]="'btn btn-primary'" (click)="submit()">
+                         </app-button>
+                     </div>
+                 </div> 
+         </form>
+     </div>
+     <mat-card class="mainCard card_set p-0 mt-4">
+         <mat-card-content class="card-body p-0"> 
+             <app-table [cols]="cols" [data]="tableData" [excelName]="'faq'" (onAction)="onActionHandler($event)" (onDone)="checkUpdate($event)"></app-table>
+         </mat-card-content>
+     </mat-card>
+ </section> 
+ <!--  List Main body End -->

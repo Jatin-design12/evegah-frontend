@@ -1,0 +1,23 @@
+<!-- <mat-form-field class="textArea" appearance="outline">
+    <mat-label>{{label}}</mat-label>
+    <textarea matInput #input [ngClass]="(controlDir && controlDir.control && controlDir.control.touched) ?
+!controlDir.control.valid ? 'is-invalid' : 'is-valid' : null" (input)="onChange($event.target.value)" (blur)="onTouched()" placeholder="{{label}}">
+  </textarea>
+    <mat-hint class="invalid-feedback" *ngIf="(controlDir && controlDir.control && !controlDir.control.valid
+  && controlDir.control.touched)">
+        <span *ngIf="controlDir.control.errors?.required">{{label}} is required</span>
+        <span *ngIf="controlDir.control.errors?.pattern">{{label}} is Invalid</span></mat-hint>
+</mat-form-field> -->
+  <mat-form-field class="textArea">
+    <mat-label> {{label}} </mat-label>
+    <textarea matInput #input [ngClass]="(controlDir && controlDir.control && controlDir.control.touched) ?
+      !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null"
+      (input)="onChange($event.target.value)" (blur)="onTouched()" [disabled]="disabled" placeholder="{{label}}" [readonly]="readonly"></textarea>
+      <mat-hint *ngIf="(controlDir && controlDir.control && !controlDir.control.valid
+  && controlDir.control.touched)">
+    <span class="error" *ngIf="controlDir.control.errors?.required">{{label}} is required</span>
+    <span class="error" *ngIf="(!controlDir.control.errors?.required && controlDir.control.invalid)">{{label}} is
+      Invalid</span>
+  </mat-hint>
+  </mat-form-field>
+

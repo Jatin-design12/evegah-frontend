@@ -1,0 +1,8 @@
+
+<mat-icon (click)="backBtn()" >keyboard_return</mat-icon> 
+<section>
+    <app-button [label]="'Lock'"   (onClick)="lockUnlock('2')"  *ngIf="deviceData.deviceStatus ==='Lock'" [class]="'btn btn-primary'">
+    </app-button>
+    <app-button [label]="'Unlock'" (onClick)="lockUnlock('1')" *ngIf="deviceData.deviceStatus ==='UnLock'"  [class]="'btn btn-primary'">
+    </app-button>
+</section>

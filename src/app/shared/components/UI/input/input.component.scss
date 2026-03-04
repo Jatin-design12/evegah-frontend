@@ -1,0 +1,20 @@
+.invalid-feedback {
+    color: rgb(204, 1, 1);
+}
+
+.mat-form-field-wrapper {
+    padding-bottom: 1rem;
+}
+.hintContainer{
+    width: 100%;
+    .hintText{
+        float: right;
+    }
+}
+mat-label {
+    font-size: 13px;
+    font-weight: 300;
+}
+input {
+    font-size: 14px;
+}

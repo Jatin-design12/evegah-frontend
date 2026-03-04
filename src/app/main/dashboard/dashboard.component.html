@@ -1,0 +1,506 @@
+<div class="main-body fleet-dashboard">
+	<div class="fleet-header">
+		<div class="fleet-header-copy">
+			<span class="fleet-badge">Live Monitoring</span>
+			<h3>Alert Dashboard</h3>
+			<p>Fleet health, utilization and exceptions in real time</p>
+		</div>
+		<div class="fleet-header-stats">
+			<div class="fleet-stat-pill">
+				<span>Total Vehicles</span>
+				<strong>{{DashboardCard.totalBike || 0}}</strong>
+			</div>
+			<div class="fleet-stat-pill">
+				<span>Active Ride</span>
+				<strong>{{DashboardCard.bookedBike || 0}}</strong>
+			</div>
+			<div class="fleet-stat-pill">
+				<span>Available</span>
+				<strong>{{DashboardCard.availableBike || 0}}</strong>
+			</div>
+		</div>
+	</div>
+	<!-- KPI summary cards hidden as requested -->
+	<div class="row fleet-kpi-grid" *ngIf="false">
+		<div class="col-md-3 activeBikeCard">
+			<mat-card class="card-edit bg-light" (click)="rideBookList()" [ngClass]="{'active': card==='activeBike'}"
+				(click)="card='activeBike'">
+				<div class="card-div">
+					<figure>
+						<mat-icon> directions_bike</mat-icon>
+					</figure>
+					<div class="details">
+						<h4>{{DashboardCard.bookedBike}}</h4>
+						<p>Active Ride</p>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+		<div class="col-md-3 availableBike" (click)="availableBike()">
+			<mat-card class="card-edit bg-light" [ngClass]="{'active': card==='available'}" (click)="card='available'">
+				<div class="card-div">
+					<figure>
+						<mat-icon> directions_bike</mat-icon>
+					</figure>
+					<div class="details">
+						<h4>{{DashboardCard.availableBike}}</h4>
+						<p>Available Vehicle </p>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+		<div class="col-md-3 stationaryBike" (click)="stationaryBike()" *ngIf="clientName === metroClientName">
+			<mat-card class="card-edit bg-light" [ngClass]="{'active': card==='stationary'}" (click)="card='stationary'">
+				<div class="card-div">
+					<figure>
+						<mat-icon> directions_bike</mat-icon>
+					</figure>
+					<div class="details">
+						<h4>{{DashboardCard.availableUnlockOrPowerOnCount}}</h4>
+						<p>Stationary Vehicles (Unlock, Power On)</p>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+		<div class="col-md-3 maintenceBike" (click)="maintenceBike()">
+			<mat-card class="card-edit bg-light" [ngClass]="{'active': card==='maintence'}" (click)="card='maintence'">
+				<div class="card-div">
+					<figure>
+						<mat-icon>build</mat-icon>
+					</figure>
+					<div class="details">
+						<h4>{{DashboardCard.underMaintenanceBike}}</h4>
+						<p>Under Maintenance Vehicle </p>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+
+		<div class="col-md-3 totalBike">
+			<mat-card class="card-edit bg-light">
+				<div class="card-div">
+					<figure>
+						<mat-icon> directions_bike</mat-icon>
+					</figure>
+					<div class="details">
+						<h4>{{DashboardCard.totalBike}}</h4>
+						<p>Total Vehicle </p>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+		<div class="col-md-3 under20">
+			<mat-card class="card-edit bg-light" (click)="batteryData('lessTwenty',20)"
+				[ngClass]="{'active': card === 'battery20'}" (click)="card ='battery20'">
+				<div class="card-div">
+					<figure>
+						<mat-icon>battery_alert</mat-icon>
+					</figure>
+					<div class="details">
+						<p>0% -20%</p>
+						<h4>{{DashboardCard.battery0To30}}</h4>
+						<p>Battery Status</p>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+		<div class="col-md-3 under50">
+			<mat-card class="card-edit bg-light" (click)="batteryData('bwTwentyFifty',50)"
+				[ngClass]="{'active': card === 'battery50'}" (click)="card = 'battery50'">
+				<div class="card-div">
+					<figure>
+						<mat-icon>battery_charging_full</mat-icon>
+					</figure>
+					<div class="details">
+						<p>21% -50%</p>
+						<h4>{{DashboardCard.battery30To50}}</h4>
+						<p>Battery Status</p>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+		<div class="col-md-3 under100">
+			<mat-card class="card-edit bg-light" (click)="batteryData('aboveFifty',100)"
+				[ngClass]="{'active': card ==='battery100'}" (click)="card ='battery100'">
+				<div class="card-div">
+					<figure>
+						<mat-icon>battery_full</mat-icon>
+					</figure>
+					<div class="details">
+						<p>51% -100%</p>
+						<h4>{{DashboardCard.batteryMore50}}</h4>
+						<p>Battery Status</p>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+		<div class="col-md-3 totalEarning">
+			<mat-card class="card-edit bg-light">
+				<div class="card-div">
+					<figure>
+						<mat-icon>₹</mat-icon>
+					</figure>
+					<div class="details">
+						<h4>{{DashboardCard.totalEarning}}</h4>
+						<p>Total Earning</p>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+		<!-- <div class="col-md-3 zonemap">
+            <mat-card class="card-edit bg-light" (click)="gotozonemap()">
+                <div class="card-div">
+                    <figure>
+                        <mat-icon>map</mat-icon>
+                    </figure>
+                    <div class="details">
+                        <h4>15</h4> 
+                        <p>Ride live tracking</p> 
+                    </div>
+                </div>
+            </mat-card>
+        </div>   -->
+		<div class="col-md-3 geofencing" (click)="geoFencingBike()">
+			<mat-card class="card-edit bg-light" [ngClass]="{'active': card==='geo'}" (click)="card='geo'">
+				<div class="card-div">
+					<figure>
+						<mat-icon> directions_bike</mat-icon>
+					</figure>
+					<div class="details">
+						<h4>{{DashboardCard.bikeOutSideOfGeoFance}}</h4>
+						<p>Vehicle outside of geofence </p>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+
+		<!--
+		<div class="col-md-3 activeBikeCard">
+			<mat-card class="card-edit bg-light" (click)="rideBookList()" [ngClass]="{'active': card==='activeBike'}"
+				(click)="card='activeBike'">
+				<div class="card-div">
+					<figure>
+						<mat-icon> directions_bike</mat-icon>
+					</figure>
+					<div class="details">
+						<h4>{{DashboardCard.pendingWithdrawRequest}}</h4>
+						<p>Total Widthdraw Request Pending</p>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+		-->
+		<!-- <div class="col-md-9 mt-4">
+                    <div>
+                        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+                            <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="{ url: '../../../../../assets/images/blue-circle.png',
+                                
+                                scaledSize: {
+                                    width: 40,
+                                    height: 40
+                                }
+                            }">
+                                <agm-info-window [disableAutoPan]="false" #infoWindow>
+                                    <div>
+                                        "Your Current Location "
+                                    </div>
+                                </agm-info-window>
+                            </agm-marker>
+
+
+                            <agm-marker *ngFor="let  zone  of  activeLocationLatLng" 
+                                [iconUrl]="
+                                    {
+                                    url: '../../../../../assets/images/favicon.ico',
+                                    
+                                    scaledSize: {
+                                        width: 40,
+                                        height: 40
+                                    }
+                            }">
+
+                                <agm-info-window [disableAutoPan]="false" #infoWindow>
+                                    <div>
+                                        Active bike
+                                    </div>
+                                </agm-info-window>
+                            </agm-marker>
+                            
+                             <agm-marker *ngFor="let  zone  of  activeBikeLocationLatLng" [latitude]="zone.latitude"
+                            [longitude]="zone.longitude" [iconUrl]="
+                                {
+                                    url: '../../../../../assets/images/favicon.ico',
+                                
+                                scaledSize: {
+                                    width: 40,
+                                    height: 40
+                                }
+                        }"> 
+
+                            <agm-info-window [disableAutoPan]="false" #infoWindow>
+                                <div>
+                                    Active bike
+                                </div>
+                            </agm-info-window>
+                           </agm-marker> -->
+		<!-- 
+                            <agm-marker *ngFor="let  zone  of  eveghaZoneMarkers" [latitude]="zone.latitude"
+                                [longitude]="zone.longitude" [iconUrl]="{url: '../../../../../assets/images/evegah_greens.png',
+                                    
+                                    scaledSize: {
+                                        width: 40,
+                                        height: 40
+                                    }
+                            }"> 
+                                <agm-info-window [disableAutoPan]="false" #infoWindow>
+                                    <div>
+                                        {{zone.name}}
+                                    </div>
+                                </agm-info-window>
+                            </agm-marker> -->
+
+		<!-- </agm-map>-->
+		<!--    </div>
+                </div> -->
+
+		<!-- <div class="col-md-3 mt-4">
+                    <div>
+                        <div class="form-group"> -->
+
+		<!-- <form [formGroup]="zoneForm">
+                                <app-select-dropdown [config]="zone" [items]="eveghaZoneMarkers" formControlName="zoneId" (selectionChange)="searchResult($event)">
+                                </app-select-dropdown>
+                            </form> -->
+		<!-- <input class="form-control" type="text" [(ngModel)]="searchText" placeholder="Search">
+                            <div class="card">
+                                <mat-accordion>
+                                    <mat-expansion-panel
+                                        *ngFor="let zone of BikeProduceDetailsList | search: searchText index as i;">
+                                       
+                                        <mat-expansion-panel-header> -->
+		<!-- (click)="searchMarkerPosition(zone) " -->
+		<!-- <div *ngIf="zone.bikeBookedStatus == 14 && zone.deviceLockAndUnlockStatus == 1" > -->
+		<!--                                                
+                                            <div class="spinner" *ngIf="zone.instruction_id != 4" >
+                                                <mat-spinner [diameter]="20"></mat-spinner>
+                                            </div> -->
+		<!-- <mat-panel-title>
+                                                ({{zone.lockNumber}})
+                                            </mat-panel-title> -->
+		<!-- <mat-panel-title>
+                                                <h6  *ngIf="zone.deveiceState === 'Connected' " style="color: green;" > 
+                                                    <strong>{{zone.deveiceState}}</strong>
+                                                </h6> 
+                                                <h6  *ngIf="zone.deveiceState != 'Connected' "  style="color: red;" >
+                                                    <strong>  {{zone.deveiceState}}</strong>   
+                                                </h6> 
+                                            </mat-panel-title> -->
+
+		<!-- </mat-expansion-panel-header> -->
+		<!-- <mat-action-row>
+                                            <button mat-button class="btn btn-primary" (click)="locateBike(zone)">Locate</button>
+                                            <button mat-button (click)="setInstruction(zone,'lock')"
+                                                *ngIf="zone.deviceLockAndUnlockStatus == 1">Lock</button>
+                                            <button mat-button (click)="setInstruction(zone,'unlock')"
+                                                *ngIf="zone.deviceLockAndUnlockStatus == 2">Unlock</button>
+                                        </mat-action-row> -->
+
+		<!-- </mat-expansion-panel>
+                                </mat-accordion>
+                            </div> -->
+
+		<!-- </div>
+                    </div>
+                </div>  -->
+	</div>
+
+	<section class="fleet-graph-section">
+		<mat-card class="mainCard card_set p-0 fleet-graph-card">
+			<mat-card-header>
+				<h5 class="cardTitle">Fleet Intelligence Overview</h5>
+			</mat-card-header>
+			<mat-card-content class="card-body fleet-graph-body">
+				<div class="fleet-kpi-wall">
+					<article class="fleet-kpi-tile utilization clickable" (click)="onFleetGraphClick('active')">
+						<p>Utilization</p>
+						<h4>{{getRatioPercent(DashboardCard.bookedBike, getFleetTotal())}}%</h4>
+						<small>{{DashboardCard.bookedBike || 0}} active of {{getFleetTotal()}} tracked</small>
+						<div class="kpi-track">
+							<div class="kpi-fill" [style.width.%]="getRatioPercent(DashboardCard.bookedBike, getFleetTotal())"></div>
+						</div>
+					</article>
+
+					<article class="fleet-kpi-tile availability clickable" (click)="onFleetGraphClick('available')">
+						<p>Availability</p>
+						<h4>{{getRatioPercent(DashboardCard.availableBike, getFleetTotal())}}%</h4>
+						<small>{{DashboardCard.availableBike || 0}} ready vehicles</small>
+						<div class="kpi-track">
+							<div class="kpi-fill" [style.width.%]="getRatioPercent(DashboardCard.availableBike, getFleetTotal())"></div>
+						</div>
+					</article>
+
+					<article class="fleet-kpi-tile alerts clickable" (click)="onFleetGraphClick('geofence')">
+						<p>Critical Alerts</p>
+						<h4>{{(DashboardCard.bikeOutSideOfGeoFance || 0) + (DashboardCard.battery0To30 || 0)}}</h4>
+						<small>Geofence + low battery incidents</small>
+						<div class="kpi-track">
+							<div class="kpi-fill"
+								[style.width.%]="getRatioPercent((DashboardCard.bikeOutSideOfGeoFance || 0) + (DashboardCard.battery0To30 || 0), getFleetTotal())"></div>
+						</div>
+					</article>
+
+					<article class="fleet-kpi-tile battery clickable" (click)="onFleetGraphClick('batteryHigh')">
+						<p>Healthy Battery (51-100%)</p>
+						<h4>{{getRatioPercent(DashboardCard.batteryMore50, getBatteryTotal())}}%</h4>
+						<small>{{DashboardCard.batteryMore50 || 0}} vehicles in healthy range</small>
+						<div class="kpi-track">
+							<div class="kpi-fill" [style.width.%]="getRatioPercent(DashboardCard.batteryMore50, getBatteryTotal())"></div>
+						</div>
+					</article>
+				</div>
+
+				<div class="fleet-visual-grid">
+					<div class="fleet-donut-panel">
+						<h6>Fleet Status Mix</h6>
+						<div class="fleet-donut-wrap">
+							<div class="fleet-donut" [style.background]="getFleetDonutGradient()">
+								<div class="fleet-donut-center">
+									<strong>{{getFleetTotal()}}</strong>
+									<span>Tracked Bikes</span>
+								</div>
+							</div>
+							<div class="fleet-donut-legend">
+								<p><span class="legend-dot active"></span>Active: {{DashboardCard.bookedBike || 0}}</p>
+								<p><span class="legend-dot available"></span>Available: {{DashboardCard.availableBike || 0}}</p>
+								<p><span class="legend-dot maintenance"></span>Maintenance: {{DashboardCard.underMaintenanceBike || 0}}</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="fleet-trend-panel">
+						<h6>Operational Distribution</h6>
+						<div class="fleet-bars">
+							<div class="fleet-bar-row clickable" *ngFor="let item of getFleetOpsData()" (click)="onFleetGraphClick(item.key)">
+								<div class="fleet-bar-meta">
+									<span class="fleet-bar-label">
+										<i class="fleet-bar-dot" [style.background]="item.gradient"></i>
+										{{item.label}}
+									</span>
+									<strong>{{item.value}}</strong>
+								</div>
+								<div class="fleet-bar-track">
+									<div class="fleet-bar-fill" [style.width.%]="getFleetBarWidth(item.value)"
+										[style.background]="item.gradient"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="fleet-battery-panel">
+						<h6>Battery Health Split</h6>
+						<div class="fleet-battery-row clickable" (click)="onFleetGraphClick('batteryLow')">
+							<span>0-20%</span>
+							<strong>{{DashboardCard.battery0To30 || 0}}</strong>
+							<div class="fleet-battery-track">
+								<div class="fleet-battery-fill low" [style.width.%]="getRatioPercent(DashboardCard.battery0To30, getBatteryTotal())"></div>
+							</div>
+						</div>
+						<div class="fleet-battery-row clickable" (click)="onFleetGraphClick('batteryMid')">
+							<span>21-50%</span>
+							<strong>{{DashboardCard.battery30To50 || 0}}</strong>
+							<div class="fleet-battery-track">
+								<div class="fleet-battery-fill mid" [style.width.%]="getRatioPercent(DashboardCard.battery30To50, getBatteryTotal())"></div>
+							</div>
+						</div>
+						<div class="fleet-battery-row clickable" (click)="onFleetGraphClick('batteryHigh')">
+							<span>51-100%</span>
+							<strong>{{DashboardCard.batteryMore50 || 0}}</strong>
+							<div class="fleet-battery-track">
+								<div class="fleet-battery-fill high" [style.width.%]="getRatioPercent(DashboardCard.batteryMore50, getBatteryTotal())"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</mat-card-content>
+		</mat-card>
+	</section>
+
+	<section *ngIf="activeRideTableHide">
+		<mat-card class="mainCard card_set p-0">
+			<mat-card-header>
+				<h5 class="cardTitle">Active Vehicle List</h5>
+			</mat-card-header>
+			<mat-card-content class="card-body">
+				<app-table [cols]="cols" [data]="totalUpdationInminBall" (onAction)="onActionHandler($event)"
+					[excelName]="'Active Ride'" (onDone)="checkUpdateForActive($event)"></app-table>
+			</mat-card-content>
+		</mat-card>
+	</section>
+	<section *ngIf="batteryRideTableHide">
+		<mat-card class="mainCard card_set p-0">
+			<mat-card-header>
+				<h5 class="cardTitle">Battery Status List ({{batteryStatus}})</h5>
+			</mat-card-header>
+			<mat-card-content class="card-body">
+				<app-table [cols]="batterycols" [data]="batteryStatusData" [excelName]="'Battery Status'"></app-table>
+			</mat-card-content>
+		</mat-card>
+	</section>
+	<section *ngIf="AvailableRideTableHide">
+		<mat-card class="mainCard card_set p-0">
+			<mat-card-header>
+				<h5 class="cardTitle">Available Vehicle List</h5>
+			</mat-card-header>
+			<mat-card-content class="card-body availableBike">
+				<app-table [cols]="availableBikeCols" [data]="availableBikeList" [excelName]="'Available Bike'"
+					(onDone)="checkUpdateForAvailable($event)"></app-table>
+			</mat-card-content>
+		</mat-card>
+	</section>
+	<section *ngIf="clientName === metroClientName && stationaryBikeTableHide === true">
+		<mat-card class="mainCard card_set p-0">
+			<mat-card-header>
+				<h5 class="cardTitle">Stationary Vehicles (Unlock, Power On)</h5>
+			</mat-card-header>
+			<mat-card-content class="card-body stationaryBike">
+				<app-table [cols]="stationaryBikeCols" [data]="stationaryBikeList"
+					[excelName]="'Stationary Vehicles (Unlock, Power On)'" (onDone)="checkUpdateForAvailable($event)"></app-table>
+			</mat-card-content>
+		</mat-card>
+	</section>
+	<section *ngIf="maintenceRideTableHide">
+		<mat-card class="mainCard card_set p-0">
+			<mat-card-header>
+				<h5 class="cardTitle">Maintenance Vehicle List </h5>
+			</mat-card-header>
+			<mat-card-content class="card-body">
+				<app-table [cols]="maintenceBikeCols" [data]="maintenceBikeData" [excelName]="'maintence Bike'"
+					(onDone)="checkUpdate($event)"></app-table>
+			</mat-card-content>
+		</mat-card>
+	</section>
+	<section *ngIf="geoFencingTableHide">
+		<mat-card class="mainCard card_set p-0">
+			<mat-card-header>
+				<h5 class="cardTitle">Outside Geo Fecncing Vehicle List</h5>
+			</mat-card-header>
+			<mat-card-content class="card-body availableBike">
+				<app-table [cols]="geoFencingBikeCols" [data]="geoFencingList" [excelName]="'Outside Geo Fecncing Bike'"
+					(onDone)="checkUpdate($event)"></app-table>
+			</mat-card-content>
+		</mat-card>
+	</section>
+	<!--
+	<section *ngIf="activeWidthdrawTableHide">
+		<mat-card class="mainCard card_set p-0">
+			<mat-card-header>
+				<h5 class="cardTitle">Total Widthdraw Request Pending</h5>
+			</mat-card-header>
+			<mat-card-content class="card-body stationaryBike">
+				<app-table [cols]="pendingWithdrawCols" [data]="withdrawInPending"
+					[excelName]="'Stationary Vehicles (Unlock, Power On)'" (onDone)="checkUpdateForAvailable($event)"></app-table>
+			</mat-card-content>
+		</mat-card>
+	</section>
+	-->
+</div>

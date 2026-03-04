@@ -1,0 +1,103 @@
+<!-- © 2021 .Kritin Digital solutions  All rights reserved.
+ Original Author: Aman Mishra
+ Original Date: 3 June 2021 -->
+
+
+<mat-toolbar color="primary" class="bg-img">
+  <button mat-icon-button (click)="burgerClick()" class="burgur_menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="verp-spacer"></span>
+  <!-- <button mat-icon-button class="notificationBtn" aria-label="icon" title="Notifications"
+    [matMenuTriggerFor]="notification">
+    <mat-icon fontSet="material-icons-outlined" [matBadgeHidden]="notificationCount===0" [matBadge]="notificationCount"
+      matBadgeColor="warn">notifications</mat-icon>
+  </button> -->
+  <div class="header-icons">
+  <div class="notifier new"> 
+    <mat-icon class="bell">notifications_none</mat-icon>
+    <div class="badge">4</div>
+  </div> 
+  <div class="notifier new"> 
+    <mat-icon class="bell"> mail_outline</mat-icon>
+    <div class="badge">2</div>
+  </div>  
+</div>
+  <mat-menu #notification="matMenu" class="notificationSection">
+    <div class="notificationHeader">
+      <h4>Notifications</h4>
+    </div>
+    <div class="notificationBody">
+      <div class="notification">
+        <mat-icon>clear</mat-icon>
+        <figure class="avatar">
+          <img src="../../../assets/images/avatar.png" class="img-fluid" alt="avatar">
+        </figure>
+        <article class="message">
+          <h4>Neelesh Khemawat</h4>
+          <p>Your submission has been accepted and you are ready to sign-up for the final assigment which will be ready
+            in 2 days</p>
+          <span>22 min ago</span>
+        </article>
+      </div>
+      <div class="notification">
+        <mat-icon>clear</mat-icon>
+        <figure class="avatar">
+          <!-- <img src="../../../assets/images/avatar.png" class="img-fluid" alt="avatar"> -->
+          <p>P</p>
+          <span class="onlineShow"></span>
+        </figure>
+        <article class="message">
+          <h4>Pratibha</h4>
+          <p>Your submission has been accepted.</p>
+          <span>22 min ago</span>
+        </article>
+      </div>
+      <div class="notification">
+        <mat-icon>clear</mat-icon>
+        <figure class="avatar">
+          <img src="../../../assets/images/avatar.png" class="img-fluid" alt="avatar">
+        </figure>
+        <article class="message">
+          <h4>Avinash</h4>
+          <p>Your submission has been accepted and you are ready to sign-up.</p>
+          <span>Oct 22, 2:25 PM</span>
+        </article>
+      </div>
+      <a href="#" class="viewAll">
+        View All <mat-icon>arrow_forward</mat-icon>
+      </a>
+    </div>
+  </mat-menu>
+  <!-- <span class="vdvider"></span> -->
+  <!-- <article class="userDetails">
+    <h5>Admin</h5>
+    <p>admin@kritin.in</p>
+  </article>  -->
+  <button mat-button [matMenuTriggerFor]="aboveMenu" aria-haspopup="true" mat-button=""
+    mattooltip="Select a version of the documentation" class="mat-focus-indicator log">
+    <figure class="avatar">
+      <img src="../../../assets/images/avatar.png" class="img-fluid" alt="user image">
+    </figure>
+    <!-- <mat-icon role="img" class="mat-icon notranslate material-icons mat-icon-no-color" aria-hidden="true"
+      data-mat-icon-type="font">expand_more</mat-icon> -->
+    <span class="mat-ripple mat-button-ripple"></span>
+    <span class="mat-button-focus-overlay"></span>
+  </button>
+  <mat-menu #aboveMenu="matMenu" yPosition="above" class="user_menu">
+    <article class="userDetails">
+      <mat-icon> navigation</mat-icon>
+      <img src="../../../assets/images/avatar.png" alt="user image">
+      <div class="ms-3">
+        <h5>Admin</h5>
+        <p>admin@kritin.in</p>
+      </div>
+    </article>
+    <button mat-menu-item [routerLink]="['/resetPassword']">
+      <mat-icon>vpn_key</mat-icon> Change Password
+    </button>
+    <button mat-menu-item (click)="logOut()">
+      <mat-icon>logout</mat-icon> Logout
+    </button>
+  </mat-menu>
+</mat-toolbar>

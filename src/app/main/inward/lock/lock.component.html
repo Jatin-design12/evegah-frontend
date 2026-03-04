@@ -1,0 +1,35 @@
+<!--App Sub Header Start -->
+<app-sub-header [heading]="heading" [icon]="'lock'" ></app-sub-header>
+<!--App Sub Header End -->
+
+<!-- Add Inward Main body Start -->
+<section class="main-body">
+    <mat-card class="mainCard card_set p-0 m-0 lastChildNotApply">
+       
+                <form [formGroup]="lockInwardForm"  *ngIf="!isClientMetro">
+                    <div class="col-sm-12">
+                        <div class="row inward-form noMarginmatField">
+                            <div class="col-sm-3">
+                                <app-date formControlName="inwardDate" [label]="'Choose Date'" [maxDate]="today"></app-date>
+                            </div>
+                            <div class="col-sm-3">
+                                <app-input [label]="'Enter IOT Device  Number'" [type]="'text'" formControlName="lockNumber">
+                                </app-input>
+                            </div>
+                            <div class="col-sm-3">
+                                <app-input [label]="'Enter IOT Device  Imei Number'" [type]="'text'" formControlName="lockIMEINumber">
+                                </app-input>
+                            </div>
+                            <div class="col-md-3 text-end" *ngIf="lockInwardAddButton">
+                                <app-button [label]="'Add'" [class]="'btn btn-primary'"  type = "submit" (click) = "addLockInward()" ></app-button>
+                            </div>
+                            <div class="col-md-3 text-end" *ngIf="lockInwardupdateButton">
+                                <app-button [label]="'UPDATE'" [class]="'btn btn-primary'"  type = "submit" (click) = "updateLockInward()" ></app-button>
+                            </div>
+                        </div>
+                    </div>
+                </form> 
+                <app-table [cols]="cols2" [data]="lockInwardData" (onAction)="onActionHandlerLOCK($event)"></app-table>
+        
+    </mat-card>
+</section>

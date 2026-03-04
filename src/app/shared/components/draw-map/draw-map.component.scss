@@ -1,0 +1,56 @@
+// /* 
+//  * Always set the map height explicitly to define the size of the div element
+//  * that contains the map. 
+//  */
+//  {
+//     margin: 2em 1em;
+//     height: 500px;
+//     border: 1px solid black;
+//     position: static!important;
+//     overflow: hidden;
+//   }
+.map-contanier{
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #dbe6f5;
+  border-radius: 12px;
+  #map{
+    min-height: 560px;
+    height: 100%;
+    max-height: 100%;
+  }
+    .my-search-box,
+    input.my-search-box{
+      position: absolute;
+      top: 18px !important;
+      left: 18px !important;
+      z-index: 1;
+      margin: 0 !important;
+      width: min(440px, calc(100% - 36px));
+      padding: 11px 14px;
+      outline: none;
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.14);
+      border: 1px solid #dbe6f5;
+      border-radius: 10px;
+      max-width:420px;
+      color: #1e293b;
+      font-size: 14px;
+      background: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      .my-search-box,
+      input.my-search-box {
+        top: 12px !important;
+        left: 12px !important;
+        width: calc(100% - 24px);
+      }
+    }
+  }
+    
+  .hide{
+    display:none !important;
+  }
+
+  

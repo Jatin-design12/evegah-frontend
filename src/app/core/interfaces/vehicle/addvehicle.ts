@@ -1,0 +1,41 @@
+export interface IVehicleModelDetails {   
+    vehicleId: number,
+    vehicleType: number,
+    modelName:string,
+    brakesType:number,
+    brandName:string,
+    frameType:number,
+    tiersSize: number,
+    minHireTime:string,
+    length: number,
+    lengthUnit:number,
+    width:number,
+    widthUnit:number,
+    weight: number,
+    weightUnit:number,
+    height: number,
+    heightUnit: number,
+    statusEnumId: number,
+    remark: string,
+    actionByLoginUserId: number,
+    actionByUserTypeEnumId: number,
+    mobileImageArray:any,
+  adminImageArray:any,
+    
+    // new parameter
+    "breakType": Array<any>,
+    "batteryType": Array<any>,
+    // "frameType": 70,
+    "batteryCapacityAh": 10,
+    "batteryCapacityVolt": 90,
+    "accesarries": Array<any>,
+    "motorType":string,
+    "color": string,
+    companyName:string
+    // "vehicleImage": [],
+    option:string,
+    add:string,
+    req:Number,
+    pageName:string
+  
+}

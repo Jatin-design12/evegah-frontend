@@ -1,0 +1,17 @@
+<div class="containers mapouter">
+    <div class="d-flex justify-content-between pt-2">
+      <div class="info ps-2 pt-2 ">
+        <p class="mb-0 pe-3 ">IOT Device: <b>{{this.data.pageValue.lockNumber}}</b> Model : <b>{{this.data.pageValue.bikeName}}</b>
+         </p>
+        
+
+      </div>
+        
+        <button class="btn-close pe-3" mat-dialog-close></button>
+    </div>
+    
+
+    <div class="gmap_canvas">
+      <app-zone-map  [locateBikeData]="this.bikeData"></app-zone-map>
+    </div>
+</div>

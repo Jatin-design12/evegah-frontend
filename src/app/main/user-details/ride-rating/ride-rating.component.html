@@ -1,0 +1,47 @@
+ <!--  App Sub Header Start-->
+ <app-sub-header [heading]="'Ride Details'" [icon]="'directions_bike'"></app-sub-header>
+ <!--  App Sub Header End-->
+ 
+ <!-- List Main body End -->
+ <section class="main-body">
+     <div class="card p-3">
+         <form [formGroup]="detailedRideFilterForm"> 
+                 <div class="row noMarginmatField  mt-3"> 
+                     <div class="col-md-3">
+                         <app-date [label]="'From Date'" formControlName="fromDate"></app-date>
+                         
+                     </div>
+                     <div class="col-md-3">
+                         <app-date [label]="'To Date'" formControlName="toDate"></app-date>
+                     </div>
+                     <div class="col-md-3">
+                         <app-select-dropdown [config]="rideStarDropdown" formControlName="rating" [items]="starEnumData" (selectionChange)="selectAllStar($event,starEnumData)"
+                         [selectAllCheck]="starCheck">
+                         </app-select-dropdown>
+                     </div>
+                     <div class="col-md-3">
+                        <app-select-dropdown [config]="commentStatusDropdown" formControlName="commentEnumId" [items]="commentEnumData">
+                        </app-select-dropdown>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <app-input [type]="'text'" [label]="'Enter User name'" formControlName="userName"> </app-input>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <app-input [type]="'Number'" [label]="'Enter Mobile Number'" formControlName="mobile"> </app-input>
+                    </div>
+                    <!-- <div class="col-md-3 mt-3">
+                    </div> -->
+                     <div class="col-md-6 text-end mt-3">
+                         <app-button [label]="'Search'" [class]="'btn btn-primary'" (click)="submit()">
+                         </app-button>
+                     </div>
+                 </div> 
+         </form>
+     </div>
+     <mat-card class="mainCard card_set p-0 mt-4">
+         <mat-card-content class="card-body p-0"> 
+             <app-table [cols]="cols" [data]="tableData" [excelName]="'Ride Rating'" (onDone)="checkUpdate($event)"></app-table>
+         </mat-card-content>
+     </mat-card>
+ </section> 
+ <!--  List Main body End -->

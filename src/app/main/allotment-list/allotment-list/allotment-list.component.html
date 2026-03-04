@@ -1,0 +1,73 @@
+<!--  App Sub Header Start-->
+<app-sub-header [heading]="'Vehicle Allocation'" [icon]="'settings_system_daydream'"></app-sub-header>
+<!-- Allotment List Start -->
+<section class="main-body">
+    <mat-card class="mainCard card_set p-0 m-0">
+        <!-- <mat-tab-group animationDuration="0ms">
+            <mat-tab label="Zone Name"> -->
+                <!-- <mat-card class="mainCard card_set p-0">
+                    <mat-card-content class="card-body"> 
+                    </mat-card-content>
+                </mat-card> -->
+                <!-- <form [formGroup]="allotmentForm" class="form-padding noMarginmatField">
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <app-select-dropdown [config]="selectModel" [items]="selectZone" formControlName="zoneId"
+                                (selectionChange)="zoneIdType($event)">
+                            </app-select-dropdown>
+                        </div>
+                    </div>
+                </form>
+                <app-table [cols]="cols" [data]="getZoneWiseListData"></app-table>
+            </mat-tab> -->
+            <!-- <mat-tab label="Bike Allotment Zone Wise"> -->
+                <!-- <mat-card class="mainCard card_set p-0">
+                    <mat-card-content class="card-body">  
+                    </mat-card-content>
+                </mat-card> -->
+                <form [formGroup]="addBikeAllotmentForm" class="form-padding">
+                    <div class="col-sm-12">
+                        <div class="row noMarginmatField justify-content-end">
+                            <div class="col-md-3">
+                                <app-select-dropdown [config]="modal" [items]="vehicleModel" formControlName="vehicleId"
+                                    (selectionChange)="vehicleIdType($event)">
+                                </app-select-dropdown>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <app-select-dropdown [config]="ID" [items]="uidModel" formControlName="uId">
+                                </app-select-dropdown>
+                            </div>
+                            <div class="col-md-3">
+                                <app-select-dropdown [config]="stateDropdown" [items]="stateData" (selectionChange)="getCitys()"
+                                  formControlName="stateId">
+                                </app-select-dropdown>
+                              </div>
+                              <div class="col-md-3 ">
+                                <app-select-dropdown [config]="cityDropdown" [items]="cityData" formControlName="cityId" (selectionChange)="getAreabyCity($event)">
+                                </app-select-dropdown>
+                              </div>
+                              <div class="col-md-3">
+                                <app-select-dropdown [config]="areaTypeDropdown" formControlName="areaTypeId"
+                                    [items]="areaTypeData" (selectionChange)="selectAreaType($event)">
+                                </app-select-dropdown>
+                            </div>
+                              <div class="col-md-3">
+                                <app-select-dropdown [config]="areaDropdown" formControlName="areaId" [items]="areaData" (selectionChange)="getZoneList($event)"></app-select-dropdown>
+                              </div>
+                            <div class="col-md-3">
+                                <app-select-dropdown [config]="zone" [items]="selectZone" formControlName="zoneId">
+                                </app-select-dropdown>
+                            </div>
+                            <div class="col-md-3 text-end mt-3">
+                                <app-button [label]="addBtn" [class]="'btn btn-primary'" (click)="addBikeAllotment()">
+                                </app-button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <app-table class="mt-5" [cols]="cols2" [data]="bikeallotedzonelist" (onAction)="onActionHandler($event)"></app-table>
+            <!-- </mat-tab> -->
+        <!-- </mat-tab-group> -->
+    </mat-card>
+</section>
+<!-- Allotment List End -->

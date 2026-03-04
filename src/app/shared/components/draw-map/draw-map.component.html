@@ -1,0 +1,27 @@
+<!-- <div class="container">
+    <input type="text" class="my-search-box" (keydown.enter)="$event.preventDefault()" placeholder="Search Location"
+        type="text" #search />
+    <div id="map" #map></div>
+</div> -->
+<div class="map-contanier drawmap">
+
+<input *ngIf="!isLocate"
+type="text"
+class="my-search-box"
+(keydown.enter)="$event.preventDefault()"
+placeholder="Search Location / IOT ID"
+(input)="onUnifiedSearchInput($event.target.value)"
+type="text"
+#search
+/>
+<div  #map class="map"  id='map'></div>
+</div>
+
+<div class="hide">
+<span #infowindowContent>
+<span #placeName class="title"></span><br />
+<strong></strong> <span #placeId></span><br />
+<span #placeAddress></span>
+</span>
+</div>
+

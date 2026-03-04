@@ -1,0 +1,87 @@
+section .container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  #map {
+    height: 100% !important;
+    min-height: 500px;
+    width: 100%;
+    // max-width:500px;
+  }
+
+  input {
+    position: absolute;
+    top: 10px;
+    z-index: 1;
+    width: 100%;
+    padding: 10px;
+    left: 25px;
+
+    outline: none;
+    box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px -1px;
+    border: none;
+    margin-left: 0px;
+    max-width: 250px;
+  }
+
+  /* height: 1000%; */
+}
+
+.map-right-Border .btn {
+  margin-left: 20px;
+  margin-top: 2px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.getAddress {
+  margin-left: 20px;
+  margin-top: 2px;
+  margin-bottom: 0px;
+  font-size: 13px;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+  .note{
+    font-size:13px;
+    color:red;
+    margin-left:20px;
+
+  }
+  button.btn.btn-danger.getAddress {
+    position: relative;
+   top: -124px;
+    // width: 150px;
+    right: 73px;
+    height: 42px;
+    opacity: .9;
+}
+}
+.note{
+  color:red;
+  font-size: 13px;
+}
+.btn-inputSet{
+  button{
+    font-size: 13px;
+    width: 85px !important;
+    height: 40px;
+    border-radius: 5px 0px 0px 5px;
+  }
+  app-input{
+    width:90%;
+  }
+}
+
+.mapContainer{
+  position: relative;
+  .getAddressDelete{
+    position: absolute;
+    bottom: 14px;
+    right: 70px;
+    height: 40px;
+  }
+}

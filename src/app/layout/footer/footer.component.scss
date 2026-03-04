@@ -1,0 +1,13 @@
+// Footer Setup
+footer {
+    background-color: var(--primary-color);
+    height: 3rem !important;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    padding-left: 2rem;
+    width: 100%;
+    font-size: 1.3rem;
+    color: var(--white-color);
+}

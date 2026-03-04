@@ -1,0 +1,105 @@
+/* 
+ * Always set the map height explicitly to define the size of the div element
+ * that contains the map. 
+ */section.container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  #map {
+    height: 500px !important;
+    width: 100%;
+    // max-width:500px;
+  }
+  /* height: 1000%; */
+}
+ 
+  
+  /* 
+   * Optional: Makes the sample page fill the window. 
+   */
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  // /* 
+//  * Always set the map height explicitly to define the size of the div element
+//  * that contains the map. 
+//  */
+div.addDetail {
+    margin: 2em 1em;
+    height: auto;
+    // border: 1px solid black;
+    position: static!important;
+    overflow: hidden;
+    box-shadow: 1px 1px 1px #ccc;
+    padding-top: 20px;
+  }
+    input{
+      position: absolute;
+      top: 60px;
+      z-index: 1;
+      width: 100%;
+      padding: 10px;
+      left: 0;
+
+      outline: none;
+      box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px -1px;
+      border: none;
+      margin-left: 10px;
+      max-width: 200px;
+    }
+    
+
+    .get{
+      position:absolute;
+      z-index: 999;
+    }
+    .set{
+      left:200px;
+    }
+    .show{
+      left: 200px;
+    top: 63px;
+    }
+
+  section {
+    .btn{
+      margin-left:10px;
+      // margin-top:20px;
+      margin-bottom:10px;
+    }
+  }
+
+  #container {
+    height: 100%;
+    display: flex;
+  }
+  
+  #sidebar {
+    flex-basis: 15rem;
+    flex-grow: 1;
+    padding: 1rem;
+    // max-width: 30rem;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    max-height: 500px;
+  }
+  #floating-panel-div{
+    display:none;
+  }
+  .row.align-items-center button {
+    width: auto;
+    height: 35px;
+    font-size: 14px;
+}
+.nearPoint{
+  position:static;
+}
+
+.setDevice{
+  height:40px;
+}
