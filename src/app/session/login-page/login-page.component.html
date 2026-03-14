@@ -56,58 +56,70 @@
     </div> -->
 
 
-<div class="main-section">
-  <video autoplay muted loop plays-inline class="back-video">
+<section class="login-page">
+  <video autoplay muted loop playsinline class="back-video" aria-hidden="true">
     <source src="../../../assets/images/Plexus - 31503.mp4" type="video/mp4">
   </video>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card-div">
-        <div>
-          <div>
-            <img *ngIf="isClient" src="../../../assets/images/company-logo.png" alt="Logo">
-            <img *ngIf="!isClient" src="../../../assets/images/company-logo.png" alt="Logo">
-          </div>
-          <h2>Welcome back!</h2>
-          <h6 class="font-weight-semibold mb-4">Please sign in to continue.</h6>
-        </div>
-        <div class="tabset">
-          <!-- Tab 1 -->
-          <input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked>
-          <label for="tab1">Login</label>
-          <!-- Tab 2 -->
-          <!-- <input type="radio" name="tabset" id="tab2" aria-controls="rauchbier">
-          <label for="tab2">Reset</label> -->
-          <div class="tab-panels">
 
-            <div id="marzen" class="tab-panel">
-              <form [formGroup]="loginForm">
-                <label class="mb-2" for="fname">Email</label><br>
-                <input class="form-input" type="text" id="fname" name="fname" formControlName="emailId"
-                  placeholder="Enter Email ID"><br>
-                <label class="mb-2 mt-4" for="pwd">Password</label><br>
-                <input class="form-input" type="password" id="pwd" name="pwd" formControlName="password"
-                  placeholder="Enter Your Password*"><br>
-                <button type="submit" class="btn-login" (click)="onSubmit()">Submit</button>
-              </form>
-            </div>
-            <!-- <div id="rauchbier" class="tab-panel">
-              <form [formGroup]="newResetPasswordForm">
-                <label class="mb-2" for="fname">New Password</label><br>
-                <input class="form-input" placeholder="New Password" type="text" formControlName="newPassword">
-                <label class="mb-2 mt-4" for="fname">Confirm Password</label><br>
-                <input class="form-input" placeholder="Confirm Password" type="text" formControlName="confirmPassword">
-                <button type="submit" class="btn-login" (click)="resetPassword()">
-                  Reset
-                </button>
-               
-              </form>
-            </div> -->
-          </div>
-        </div>
+  <div class="bg-overlay" aria-hidden="true"></div>
+
+  <div class="login-shell">
+    <div class="brand-panel">
+      <div class="brand-chip">Admin Dashboard</div>
+      <h1>Manage EV operations with confidence</h1>
+      <p>
+        One secure place to monitor activity, control workflows, and keep your team in sync.
+      </p>
+    </div>
+
+    <div class="login-card" role="region" aria-label="Login form">
+      <div class="logo-wrap">
+        <img *ngIf="isClient" src="../../../assets/images/company-logo.png" alt="Company logo">
+        <img *ngIf="!isClient" src="../../../assets/images/company-logo.png" alt="Company logo">
       </div>
+
+      <h2>Welcome back</h2>
+      <p class="subtitle">Please sign in to continue</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="field-group">
+          <label for="emailId">Email</label>
+          <input
+            class="form-input"
+            type="email"
+            id="emailId"
+            formControlName="emailId"
+            placeholder="Enter registered email"
+            autocomplete="username"
+          >
+          <small class="error-text" *ngIf="loginForm.get('emailId')?.touched && loginForm.get('emailId')?.invalid">
+            Please enter a valid email address.
+          </small>
+        </div>
+
+        <div class="field-group">
+          <label for="password">Password</label>
+          <input
+            class="form-input"
+            type="password"
+            id="password"
+            formControlName="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+          >
+          <small class="error-text" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+            Password is required.
+          </small>
+        </div>
+
+        <div class="action-row">
+          <a class="link-reset" [routerLink]="['/resetPassword']">Reset Password</a>
+        </div>
+
+        <button type="submit" class="btn-login">Sign In</button>
+      </form>
     </div>
   </div>
-</div>
+</section>
 
 <!-- Login Main Section End -->

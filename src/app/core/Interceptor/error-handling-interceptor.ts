@@ -21,22 +21,43 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     constructor(private toastr: ToastrService,
     public router: Router,  private sessionService: SessionService,
     ){}
+
+  private getReadableErrorMessage(error: HttpErrorResponse): string {
+    const payload: any = error?.error;
+    const serverStatusCode = payload?.statusCode || error.status;
+    const serverMessage = payload?.message || error.statusText || 'Unexpected server error';
+    const payloadAsText = typeof payload === 'string' ? payload : '';
+    const looksLikeHtmlError = payloadAsText.includes('<html') || payloadAsText.includes('<!DOCTYPE html');
+
+    if (error.status === 502 || looksLikeHtmlError) {
+      return 'Server is temporarily unavailable (502 Bad Gateway). Please try again in a moment.';
+    }
+
+    if (error.status === 0) {
+      return 'Unable to reach server. Please check network connection and server availability.';
+    }
+
+    return `We Are Unable To Process Your Request Please Try Again Later \nView Error Details Below: \nError Code: ${serverStatusCode} \nMessage: ${serverMessage}`;
+  }
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(retry(1),catchError((error: HttpErrorResponse) => {
 
           let errorMessage = '';
           if (error.error instanceof ErrorEvent) {
             // client-side error
-            errorMessage = `Error: ${error.error.error.MessageList}`;
+            errorMessage = `Error: ${error.error.error?.MessageList || error.error.message || 'Client-side error'}`;
           } else {
             // server-side error
             console.log('error',error.error)
-            errorMessage = `We Are Unable To Process Your Request Please Try Again Later \nView Error Details Below: \nError Code: ${error.error.statusCode} \nMessage: ${error.error.message}`;
+            errorMessage = this.getReadableErrorMessage(error);
           }
           // window.alert(errorMessage);
 
           this.toastr.error(errorMessage)
-          if (error.error.statusCode === 401 && error.error.message =="token is not valid") {
+          const statusCode = error?.error?.statusCode || error?.status;
+          const statusMessage = error?.error?.message || '';
+          if (statusCode === 401 && statusMessage =="token is not valid") {
            
             this.toastr.error(errorMessage)
             this.logOut();
