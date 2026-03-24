@@ -301,6 +301,7 @@ export class LocateMapModalComponent implements OnInit {
       zIndex: 2,
       clickable: true,
     });
+    this.applyMarkerLabelStyle(this.locateMarker);
      
     if(this.data.pageValue.bikeStatusName== Available) this.setBikeIcon(this.locateMarker, blueBike) 
     if(this.data.pageValue.bikeStatusEnumId == Active) this.setBikeIcon(this.locateMarker, greenBike) 
@@ -389,6 +390,27 @@ export class LocateMapModalComponent implements OnInit {
       labelOrigin: new google.maps.Point(24, -5),
     };
     bike.setIcon(icon);
+    this.applyMarkerLabelStyle(bike);
+  }
+
+  applyMarkerLabelStyle(marker) {
+    const currentLabel = marker?.getLabel?.();
+    if (!currentLabel) return;
+
+    if (typeof currentLabel === 'string') {
+      marker.setLabel({
+        text: currentLabel,
+        color: '#000000',
+        fontWeight: '700',
+      });
+      return;
+    }
+
+    marker.setLabel({
+      ...currentLabel,
+      color: '#000000',
+      fontWeight: currentLabel.fontWeight || '700',
+    });
   }
 
   ngAfterViewInit() {

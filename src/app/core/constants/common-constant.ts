@@ -274,7 +274,7 @@ export const AreafillColor = '#FF0000'; //#ffff00' // area Drawing color  red
 export const CityfillColor = '#000000'; // city Drawing color black
 export const ShiftZone = 'Transfer Zone';
 
-export const iconLabelColor = 'blue';
+export const iconLabelColor = '#3e3e3e';
 export const ActiveOrDeactive = 'activeOrDeactive'; // for fare plan
 
 export const ActiveOrDeactiveButton = 'Active'; // status button global table

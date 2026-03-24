@@ -102,26 +102,16 @@ export class UserDetailsComponent implements OnInit {
     this.spinner.show();
     this.triggerTableRefreshAnimation();
     const cachedRows = this.getCachedUsers();
-    const syncToken = this.getSyncToken();
 
     if (cachedRows.length > 0) {
       this.rowData = this.normalizeUserRows(cachedRows);
     }
 
-    this.subscription.push(this.userService.getUserListWithDelta(0, 1, syncToken || undefined).subscribe((response: any) => {
-      const res = response?.body;
+    this.subscription.push(this.userService.getUserList(0, 1).subscribe((res: any) => {
       if (res?.statusCode === 200) {
-        const isDeltaMode = response?.headers?.get('x-delta-mode') === 'true';
-        const incomingRows = res.data || [];
-        const mergedRows = isDeltaMode ? this.mergeUserRows(this.rowData, incomingRows) : incomingRows;
-        this.rowData = this.normalizeUserRows(mergedRows);
+        this.rowData = this.normalizeUserRows(res.data || []);
         this.triggerTableRefreshAnimation();
         this.cacheUsers(this.rowData);
-
-        const latestSyncToken = response?.headers?.get('x-sync-token');
-        if (latestSyncToken) {
-          this.setSyncToken(latestSyncToken);
-        }
         this.spinner.hide();
       } else {
         if (cachedRows.length === 0) {
